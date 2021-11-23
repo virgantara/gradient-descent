@@ -16,13 +16,29 @@ require_once "train.php";
 
 
 <?php
-
-$lr = !empty($_GET['lr']) ? $_GET['lr'] : 0.0002;
+$M = !empty($_GET['m']) ? $_GET['m'] : 0;
+$C = !empty($_GET['c']) ? $_GET['c'] : 0;
+$lr = !empty($_GET['lr']) ? $_GET['lr'] : 0.01;
 $epoch = !empty($_GET['epoch']) ? $_GET['epoch'] : 1000;
 
 
 
-$model = train($lr, $epoch);
+$list_titik = [
+	[0.5, 1.4],
+	[2.3, 1.9],
+	[2.9, 3.2]
+];
+
+
+
+$start_time = microtime(true); 
+$model = train($list_titik, $lr, $epoch, $M, $C);
+$end_time = microtime(true); 
+
+// exit;  
+// Calculate the script execution time 
+$execution_time = ($end_time - $start_time); 
+
 $c = $model['c'];
 $m = $model['m'];
 
@@ -55,6 +71,16 @@ $m = round($m,2);
 
 					</div>
 					<div class="mb-3">
+						<label for="">Initial M</label>
+						<input class="form-control"  type="text" name="m" value="<?=$M;?>">
+
+					</div>
+					<div class="mb-3">
+						<label for="">Initial C</label>
+						<input class="form-control"  type="text" name="c" value="<?=$C;?>">
+
+					</div>
+					<div class="mb-3">
 						<p>
 						<button type="submit" class="btn btn-primary">Submit</button>
 						</p>
@@ -62,12 +88,13 @@ $m = round($m,2);
 				</form>
 				<ul>
 				<?php 
+				echo "<li>Durasi training: ".round($execution_time,8)." seconds</li>"; 
 				echo "<li>Learning Rate = ".$lr."</li>";
-echo "<li>R<sup>2</sup> = ".$r2."</li>";
-echo "<li>c = ".$c."</li>";
-echo "<li>m = ".$m."</li>";
+				echo "<li>R<sup>2</sup> = ".$r2."</li>";
+				echo "<li>c = ".$c."</li>";
+				echo "<li>m = ".$m."</li>";
 
-echo "<li>y = ".$c." + ".$m."x</li>";
+				echo "<li>y = ".$c." + ".$m."x</li>";
 				 ?>
 				 </ul>
 			

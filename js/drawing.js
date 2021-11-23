@@ -34,7 +34,10 @@ function drawCartesianPoint(ctx, x, y) {
 	y = (C_HEIGHT / 2) - y
 	ctx.fillStyle = '#00A300';
     ctx.fillRect(x, (y), 10, 10); 
-
+    ctx.fillStyle = '#00A300';
+    ctx.font = "12px Arial";
+    ctx.fillText("("+x+","+y+")",x, y+23);
+    
 }
 
 function drawCartesianLine(ctx, x1, y1, x2, y2) {

@@ -3,15 +3,14 @@
 define("C_X_LIMIT", 10);
 define("C_Y_LIMIT", 10);
 
-function train($lr = 0.01, $epoch=1000){
+function train($points = [], $lr = 0.01, $epoch=1000, $m = 0, $c = 0){
 
 	$results = [];
 
-	$list_titik = [
-		[0.5, 1.4],
-		[2.3, 1.9],
-		[2.9, 3.2]
-	];
+	if(empty($points))
+		return;
+
+	$list_titik = $points;
 
 	$list_titik_converted = [];
 
@@ -24,13 +23,7 @@ function train($lr = 0.01, $epoch=1000){
 		$list_titik_converted[] = $p;
 	}
 
-	// inisial m & c
-	$m = 0;
-	$c = 0;
-
-	// $lr = 0.0002;
-	// $epoch = 1000;	
-
+	
 	$list_points = [];
 	$r2 = 0;
 	for($i = 0; $i < $epoch;$i++){
