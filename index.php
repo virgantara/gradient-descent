@@ -111,10 +111,7 @@ $m = round($m,2);
 <script src="js/drawing.js"></script>
 
 <script>
-const C_X_LIMIT = 10
-const C_Y_LIMIT = 10
-const C_WIDTH = 800
-const C_HEIGHT = 800
+
 $(document).ready(function(){
 	var list_titik = <?=json_encode($list_points);?>
 
