@@ -3,7 +3,7 @@
 define("C_X_LIMIT", 10);
 define("C_Y_LIMIT", 10);
 
-function train($points = [], $lr = 0.01, $epoch=1000, $m = 0, $c = 0){
+function train($points = [], $lr = 0.01, $epoch=1000, $m = 1, $c = 1){
 
 	$results = [];
 
@@ -26,10 +26,13 @@ function train($points = [], $lr = 0.01, $epoch=1000, $m = 0, $c = 0){
 	
 	$list_points = [];
 	$r2 = 0;
+	$ssr = 0;
 	for($i = 0; $i < $epoch;$i++){
 
 		$sum_dssr_dc = 0;
 		$sum_dssr_dm = 0;
+
+		
 
 		foreach($list_titik as $pt){
 			$x = $pt[0];
@@ -43,6 +46,8 @@ function train($points = [], $lr = 0.01, $epoch=1000, $m = 0, $c = 0){
 
 			$yp = $c + $m * $x;
 			$r2 = abs($yt - $yp);
+
+			$ssr += ($yt - $yp) ** 2;
 		}
 
 		$step_size = $sum_dssr_dc * $lr;
@@ -72,6 +77,7 @@ function train($points = [], $lr = 0.01, $epoch=1000, $m = 0, $c = 0){
 		'c' => $c,
 		'r2' => $r2,
 		'm' => $m,
+		'ssr' => $ssr,
 		'list_points' => $list_points,
 		'list_titik_converted' => $list_titik_converted
 	];

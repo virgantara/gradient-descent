@@ -1,0 +1,7 @@
+{
+    "require": {
+        "bshaffer/oauth2-server-php": "^1.14",
+        "firebase/php-jwt": "^6.10",
+        "aws/aws-sdk-php": "^3.356"
+    }
+}

@@ -24,9 +24,9 @@ $epoch = !empty($_GET['epoch']) ? $_GET['epoch'] : 1000;
 
 
 $list_titik = [
-	[0.5, 1.4],
-	[2.3, 1.9],
-	[2.9, 3.2]
+	[0.5, 1.5],
+	[2.5, 2],
+	[3, 3]
 ];
 
 
@@ -35,16 +35,18 @@ $start_time = microtime(true);
 $model = train($list_titik, $lr, $epoch, $M, $C);
 $end_time = microtime(true); 
 
+
 // exit;  
 // Calculate the script execution time 
 $execution_time = ($end_time - $start_time); 
 
 $c = $model['c'];
 $m = $model['m'];
-
+$ssr = $model['ssr'];
 $r2 = $model['r2'];
 
 $list_points = $model['list_points'];
+
 $list_titik_converted = $model['list_titik_converted'];
 
 $c = round($c,2);
@@ -94,7 +96,7 @@ $m = round($m,2);
 				echo "<li>R<sup>2</sup> = ".$r2."</li>";
 				echo "<li>c = ".$c."</li>";
 				echo "<li>m = ".$m."</li>";
-
+				echo "<li>ssr = ".$ssr."</li>";
 				echo "<li>y = ".$c." + ".$m."x</li>";
 				 ?>
 				 </ul>
@@ -110,13 +112,17 @@ $m = round($m,2);
 
 
 <script src="js/drawing.js"></script>
-
+<?php 
+// echo '<pre>';
+// print_r(json_encode($list_points));exit;
+ ?>
 <script>
 const C_X_LIMIT = 10
 const C_Y_LIMIT = 10
 const C_WIDTH = 800
 const C_HEIGHT = 800
 $(document).ready(function(){
+
 	var list_titik = <?=json_encode($list_points);?>
 
 	var posisi_titik = <?=json_encode($list_titik_converted);?>
