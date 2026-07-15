@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Curriculum Vitae - Oddy Virgantara Putra, Ph.D</title>
+  <title>Curriculum Vitae - Dr. Ir. Oddy Virgantara Putra</title>
 
   <style>
     /* ===============================
@@ -118,10 +118,54 @@
     table, ol {
       page-break-before: auto;
     }
+  
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 210mm;
+      margin: 0 auto;
+    }
+
+    tbody tr {
+      page-break-inside: avoid;
+    }
+
+    td:nth-child(2) {
+      width: 28%;
+      font-weight: bold;
+    }
+
+    td:nth-child(3) {
+      width: auto;
+    }
+
+    .profile-links li {
+      margin-bottom: 5px;
+    }
+
+    @media print {
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+
+      h1, h2, h3 {
+        break-after: avoid;
+      }
+
+      table, tr, td, th, li {
+        break-inside: avoid;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+  <div class="container">
 
   <h1>CURRICULUM VITAE</h1>
 
@@ -129,39 +173,40 @@
 
   <table border="1" cellpadding="6" cellspacing="0">
     <tbody>
-      <tr><td>1</td><td>Nama</td><td>Dr. Oddy Virgantara Putra, S.Kom., M.T., IPP.</td></tr>
+      <tr><td>1</td><td>Nama Lengkap dan Gelar</td><td>Dr. Ir. Oddy Virgantara Putra, S.Kom., M.T., IPP.</td></tr>
       <tr><td>2</td><td>NIY</td><td>160589</td></tr>
       <tr><td>3</td><td>NIDN/NUPTK</td><td>0724088803/9156766667130253</td></tr>
       <tr><td>4</td><td>Tempat Lahir / Tgl. Lahir</td><td>Kediri / 24 Agustus 1988</td></tr>
       <tr><td>5</td><td>Jenis Kelamin</td><td>Pria</td></tr>
-      <tr><td>6</td><td>Progam Studi</td><td>Teknik Informatika</td></tr>
+      <tr><td>6</td><td>Program Studi</td><td>Teknik Informatika</td></tr>
       <tr><td>7</td><td>Fakultas</td><td>Sains dan Teknologi</td></tr>
       <tr><td>8</td><td>Perguruan Tinggi</td><td>Universitas Darussalam Gontor</td></tr>
-      <tr><td>9</td><td>Jabatan Fungsional/TMT</td><td>Lektor/ 15 November 2021</td></tr>
-      <tr><td>10</td><td>Pangkat dan Golongan/TMT</td><td>Penata Tk. I golongan ruang III/d/1 Mei 2024</td></tr>
-      <tr><td>11</td><td>Agama</td><td>Islam</td></tr>
-      <tr><td>12</td><td>Status perkawinan</td><td>Kawin</td></tr>
+      <tr><td>9</td><td>Jabatan Fungsional / TMT</td><td>Lektor / 15 November 2021</td></tr>
+      <tr><td>10</td><td>Pangkat dan Golongan / TMT</td><td>Penata Tk. I golongan ruang III/d / 1 Mei 2024</td></tr>
+      <tr><td>12</td><td>Kualifikasi Profesi</td><td>Insinyur Profesional Pratama (IPP.)</td></tr>
+      <tr><td>12</td><td>Agama</td><td>Islam</td></tr>
+      <tr><td>13</td><td>Status Perkawinan</td><td>Kawin</td></tr>
       <tr>
         <td>13</td>
         <td>Alamat Rumah</td>
         <td>
           Jl Garuda, Dukuh Krajan, RT 03/RW 01, Desa Serangan,<br/>
           Kec. Mlarak, Kab. Ponorogo, Prov. Jawa Timur,<br/>
-          Indonesia, Kodepos: 63472
+          Indonesia, Kode Pos: 63472
         </td>
       </tr>
-      <tr><td>14</td><td>E-mail</td><td>oddy@unida.gontor.ac.id</td></tr>
-      <tr><td>15</td><td>HP</td><td>08563667286</td></tr>
-      <tr><td>16</td><td>Nomor telepon/Fax Kantor</td><td>-</td></tr>
+      <tr><td>15</td><td>E-mail</td><td>oddy@unida.gontor.ac.id</td></tr>
+      <tr><td>16</td><td>HP</td><td>08563667286</td></tr>
+      <tr><td>17</td><td>Nomor Telepon/Faks Kantor</td><td>-</td></tr>
       <tr>
         <td>17</td>
         <td>Alamat Kantor</td>
-        <td>Universitas Darussalam Gontor Jln Raya Siman, Kec. Siman, Kab. Ponorogo</td>
+        <td>Universitas Darussalam Gontor Jl. Raya Siman, Kec. Siman, Kab. Ponorogo</td>
       </tr>
       <tr>
         <td>18</td>
         <td>Link Author SINTA</td>
-        <td>https://sinta.kemdikbud.go.id/authors/profile/6190178</td>
+        <td><a href="https://sinta.kemdikbud.go.id/authors/profile/6190178">https://sinta.kemdikbud.go.id/authors/profile/6190178</a></td>
       </tr>
     </tbody>
   </table>
@@ -197,10 +242,17 @@
         <td>Teknik Elektro/ Teknik Informatika dan Komputer</td>
       </tr>
 
+      <tr>
+        <td>2026</td>
+        <td>Profesi</td>
+        <td>Institut Teknologi Sepuluh Nopember</td>
+        <td>Program Profesi Insinyur</td>
+      </tr>
+
     </tbody>
   </table>
 
-  <h2>KURSUS/LATIHAN DIDALAM DAN DILUAR NEGERI</h2>
+  <h2>KURSUS/PELATIHAN DI DALAM DAN DI LUAR NEGERI</h2>
 
   <table border="1" cellpadding="6" cellspacing="0">
     <thead>
@@ -215,7 +267,7 @@
       <tr>
         <td>1</td>
         <td>2023</td>
-        <td>Sakura Science Program di Nara Institut of Science and Technology, Nara, Jepang</td>
+        <td>Sakura Science Program di Nara Institute of Science and Technology, Nara, Jepang</td>
         <td>Japan Science and Technology Agency (JST)</td>
       </tr>
       <tr>
@@ -247,39 +299,40 @@
     <tbody>
       <tr>
         <td>1</td>
-        <td>2017 - sekarang</td>
+        <td>2017–sekarang</td>
         <td>Dosen Program Studi Teknik Informatika, Universitas Darussalam Gontor</td>
         <td>Universitas Darussalam Gontor</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>2011 – 2015</td>
+        <td>2011–2015</td>
         <td>Senior Software Engineer</td>
         <td>PT Data Integra Dinamika</td>
       </tr>
     </tbody>
   </table>
 
-  <h2>Link of PUBLICATIONS</h2>
-  <ol>
-    <!-- <li>SINTA: https://sinta.kemdikbud.go.id/authors/profile/6190178</li> -->
-    <li>GS: https://scholar.google.com/citations?hl=en&amp;user=56jbnvsAAAAJ</li>
-    <li>ORCID: https://orcid.org/0000-0002-7472-9174</li>
-    <li>Scopus: https://www.scopus.com/authid/detail.uri?authorId=57193734595</li>
-    <li>ResearchGate: https://www.researchgate.net/profile/Oddy-Putra/publications</li>
+  <h2>TAUTAN PROFIL PUBLIKASI</h2>
+  <ol class="profile-links">
+    <!-- <li>SINTA: <a href="https://sinta.kemdikbud.go.id/authors/profile/6190178">https://sinta.kemdikbud.go.id/authors/profile/6190178</a></li> -->
+    <li>GS: <a href="https://scholar.google.com/citations?hl=en&amp;user=56jbnvsAAAAJ">https://scholar.google.com/citations?hl=en&amp;user=56jbnvsAAAAJ</a></li>
+    <li>ORCID: <a href="https://orcid.org/0000-0002-7472-9174">https://orcid.org/0000-0002-7472-9174</a></li>
+    <li>Scopus: <a href="https://www.scopus.com/authid/detail.uri?authorId=57193734595">https://www.scopus.com/authid/detail.uri?authorId=57193734595</a></li>
+    <li>ResearchGate: <a href="https://www.researchgate.net/profile/Oddy-Putra/publications">https://www.researchgate.net/profile/Oddy-Putra/publications</a></li>
   </ol>
 
-  <h2>List of PUBLICATIONS</h2>
+  <h2>DAFTAR PUBLIKASI</h2>
   <h3>2026</h3>
   <ol>
     <li>Human Pose Classification Using a Large Kernel Attention-driven 3D Transformer Model (PointLARKA) with LiDAR Point Cloud Features. 2026. International Journal of Intelligent Engineering and Systems, 19(2): 83–95.
   </li>
-  <li>Widya Kurniawan, <b>Oddy Virgantara Putra</b>, Amelia Utami, "Implementasi Algoritma Support Vectore Machine Untuk Klasifikasi Kesehatan Mental Mahasiswa Tingkat Akhir pada Proses Penyusunan Skripsi Berdasarkan Filsafat AL-WUJUD dalam Islam",
-    ;
-    Jurnal Ilmiah IT CIDA, Vol.11, 2, p69-83;
-     DOI: https://doi.org/10.55635/jic.v11i2.295 
-
-  </li>
+    <li>
+      Widya Kurniawan, <b>Oddy Virgantara Putra</b>, dan Amelia Utami.
+      “Implementasi Algoritma Support Vector Machine untuk Klasifikasi Kesehatan Mental Mahasiswa Tingkat Akhir
+      pada Proses Penyusunan Skripsi Berdasarkan Filsafat Al-Wujud dalam Islam.”
+      <em>Jurnal Ilmiah IT CIDA</em>, 11(2), 69–83, 2026.
+      DOI: <a href="https://doi.org/10.55635/jic.v11i2.295">https://doi.org/10.55635/jic.v11i2.295</a>
+    </li>
   </ol>
   <h3>2025</h3>
   <ol>
@@ -347,7 +400,7 @@
     <li>
       Oddy Virgantara Putra, Riansyah, M., Rahmanti, F., Priyadi, A., Wulandari, D., Ogata, K., Yuniarno, E., &amp; Purnomo, M. (2024).
       Enhancing LiDAR-Based Object Recognition Through a Novel Denoising and Modified GDANet Framework.
-      IEEE Access, 12, 7285-7297. (Q1) https://doi.org/ 10.1109/ACCESS.2023.3347033
+      IEEE Access, 12, 7285-7297. (Q1) https://doi.org/10.1109/ACCESS.2023.3347033
     </li>
     <li>
       Oddy Virgantara Putra, M. I. Riansyah, Riandini, A. Priyadi, E. M. Yuniarno and M. H. Purnomo,
@@ -373,7 +426,7 @@
       Yuni Yamasari, Anita Qoiriah, Naim Rochmawati, Rafif Aydin Ahmad, Oddy Virgantara Putra. (2023).
       “Detecting Students' Behavior on the E-Learning System Using SVM Kernels-Based Ensemble Learning Algorithm.”
       International Journal of Intelligent Engineering and Systems, 16(1), 2023. 142-153. (Q2)
-      https://doi.org/10.22266/ ijies2023.0228.13
+      https://doi.org/10.22266/ijies2023.0228.13
     </li>
   
   </ol>
@@ -381,10 +434,12 @@
   
 
 <div class="signature">
-  <p>Ponorogo, 21 Januari 2026</p>
+  <p>Ponorogo, April 2026</p>
   <p>Yang Membuat,</p>
   <br/><br/>
-  <p><strong>Dr. Oddy Virgantara Putra, S.Kom., M.T., IPP.</strong></p>
+  <p><strong>Dr. Ir. Oddy Virgantara Putra, S.Kom., M.T., IPP.</strong></p>
 </div>
 
+  </div>
+</body>
 </html>

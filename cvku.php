@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Curriculum Vitae - Dr. Oddy Virgantara Putra</title>
+  <title>Curriculum Vitae - Dr. Ir. Oddy Virgantara Putra</title>
 
   <style>
     @page {
@@ -129,13 +129,58 @@
     .clear {
       clear: both;
     }
+
+    .header {
+      min-height: 125px;
+      margin-bottom: 18px;
+    }
+
+    .name {
+      font-size: 15pt;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .title {
+      font-size: 11pt;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .meta {
+      font-size: 10.5pt;
+      line-height: 1.4;
+    }
+
+    ol {
+      margin-top: 6px;
+      padding-left: 22px;
+    }
+
+    strong, b {
+      font-weight: 700;
+    }
+
+    @media print {
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+
+      .section-block,
+      li,
+      table,
+      img {
+        break-inside: avoid;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
 
     <h1>Curriculum Vitae</h1>
-    <div class="subtitle"><strong>Dr. Oddy Virgantara Putra</strong></div>
+    <div class="subtitle"><strong>Dr. Ir. Oddy Virgantara Putra</strong></div>
     <div class="contact">
       Department of Informatics, Faculty of Science and Technology, Universitas Darussalam Gontor, Indonesia<br>
       Email: oddy@unida.gontor.ac.id
@@ -145,17 +190,18 @@
       <img
         src="https://scholar.googleusercontent.com/citations?view_op=view_photo&user=56jbnvsAAAAJ&citpid=3"
         class="photo"
+        alt="Portrait of Dr. Ir. Oddy Virgantara Putra"
       />
 
-      <div class="name">Dr. Oddy Virgantara Putra</div>
+      <div class="name">Dr. Ir. Oddy Virgantara Putra</div>
 
       <div class="title">
-        Associate Professor (Artificial Intelligence), Universitas Darussalam Gontor
+        Associate Professor of Artificial Intelligence, Universitas Darussalam Gontor
       </div>
 
       <div class="meta">
         IEEE Member (No. 94214817) — IEEE Young Professionals — Region 10 (Indonesia)<br>
-        Selected Member, IEEE SMC Technical Committee (2026)<br>
+        Selected Member, IEEE SMC Technical Committee on Intelligent Systems to Human-Aware Sustainability (2026)<br>
         oddy@unida.gontor.ac.id | github.com/virgantara
       </div>
     </div>
@@ -165,7 +211,7 @@
     <table class="two-col">
       <tr>
         <td class="label">Full Name</td>
-        <td>Oddy Virgantara Putra</td>
+        <td>Dr. Ir. Oddy Virgantara Putra</td>
       </tr>
       <tr>
         <td class="label">Affiliation</td>
@@ -173,7 +219,11 @@
       </tr>
       <tr>
         <td class="label">Position</td>
-        <td>Associate Professor</td>
+        <td>Associate Professor of Artificial Intelligence</td>
+      </tr>
+      <tr>
+        <td class="label">Professional Qualification</td>
+        <td>Professional Engineer (Ir.)</td>
       </tr>
       <tr>
         <td class="label">City, Country</td>
@@ -190,7 +240,7 @@
     <div class="section-block">
       <h2>Research Profile</h2>
       <p>
-        Oddy Virgantara Putra is an Associate Professor and researcher in artificial intelligence,
+        Dr. Ir. Oddy Virgantara Putra is an Associate Professor of Artificial Intelligence, a Professional Engineer, and a researcher,
         specializing in low-resource self-supervised learning for 3D point cloud understanding 
         and human-centered intelligent systems. His work focuses on developing adaptive learning 
         mechanisms that integrate self-supervised and active learning strategies to improve 
@@ -220,6 +270,11 @@ systems operating under limited supervision.
     <div class="section-block">
       <h2>Education</h2>
       <ul>
+        <li>
+          <strong>Professional Engineer (Ir.)</strong><br>
+          Professional Engineer Program, Institut Teknologi Sepuluh Nopember,
+          Surabaya, Indonesia, 2026
+        </li>
         <li>
           <strong>Ph.D. in Electrical Engineering</strong><br>
           Institut Teknologi Sepuluh Nopember, Surabaya, Indonesia, 2025
@@ -268,6 +323,12 @@ systems operating under limited supervision.
       <h2>International Training and Academic Exposure</h2>
       <ul>
         <li>
+          <strong>2026 IEEE Systems, Man, and Cybernetics Society Summer School on Quantum Cybernetics and AI</strong>,
+          Nanjing University, Nanjing, China, 2026<br>
+          Participated in an international summer school focusing on quantum cybernetics, quantum artificial intelligence,
+          intelligent systems, and interdisciplinary research within the IEEE Systems, Man, and Cybernetics Society.
+        </li>
+        <li>
           <strong>Sakura Science Program</strong>, Nara Institute of Science and Technology, Nara, Japan, 2023<br>
           Organizer: Japan Science and Technology Agency (JST)
         </li>
@@ -281,7 +342,23 @@ systems operating under limited supervision.
     <div class="section-block">
       <h2>Selected Publications</h2>
       <ol class="pub-list">
-        <li>Herti Miawarni, <b>Putra, O. V.</b>, Eko Setijadi, Tri Arief Sardjono, Mauridhi Hery Purnom. "Human pose classification using a large kernel attention-driven 3D transformer model (PointLARKA) with LiDAR point cloud features". International Journal of Intelligent Engineering and Systems, 19(2), 2026, 83–95. doi:10.22266/ijies2026.0228.06</li>
+
+        <li>Herti Miawarni, <b>Putra, O. V.</b>, Eko Setijadi, Tri Arief Sardjono, Mauridhi Hery Purnomo. "Human pose classification using a large kernel attention-driven 3D transformer model (PointLARKA) with LiDAR point cloud features". International Journal of Intelligent Engineering and Systems, 19(2), 2026, 83–95. doi:10.22266/ijies2026.0228.06</li>
+        <li>
+  E. P. Widhi, <strong>Putra, O. V.</strong>, W. Kurniawan, F. R. Pradhana, A. Musthafa, and R. C. Putra.
+  “Attention-Enhanced Deep Learning for Brain Tumor Classification.”
+  <em>2025 IEEE International Biomedical Instrumentation and Technology Conference (IBITeC)</em>,
+  Yogyakarta, Indonesia, 2025, pp. 195–200.
+  DOI: 10.1109/IBITeC66306.2025.11473096
+</li>
+
+<li>
+  <strong>Putra, O. V.</strong>, E. P. Widhi, W. Kurniawan, F. R. Pradhana, K. Ogata, and H. Suroto.
+  “Enhancing Bone Tumor X-Ray Classification with Hybrid Augmentation Based on YOLOv8.”
+  <em>2025 IEEE International Biomedical Instrumentation and Technology Conference (IBITeC)</em>,
+  Yogyakarta, Indonesia, 2025, pp. 1–6.
+  DOI: 10.1109/IBITeC66306.2025.11473169
+</li>
         <li>
           <strong>Putra, O. V.</strong>, Kohichi Ogata, Eko Mulyanto Yuniarno, Mauridhi Hery Purnomo.
           “AdaCrossNet: Adaptive Dynamic Loss Weighting for Cross-Modal Contrastive Point Cloud Learning.”
@@ -356,10 +433,10 @@ systems operating under limited supervision.
 </div>
 
     <div class="signature">
-      <p>Ponorogo, Indonesia, February 2026</p>
+      <p>Ponorogo, Indonesia, April 2026</p>
       <p>Sincerely,</p>
       <br>
-      <p><strong>Dr. Oddy Virgantara Putra</strong></p>
+      <p><strong>Dr. Ir. Oddy Virgantara Putra</strong></p>
     </div>
 
   </div>
