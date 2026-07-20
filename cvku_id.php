@@ -181,7 +181,7 @@
       <tr><td>6</td><td>Program Studi</td><td>Teknik Informatika</td></tr>
       <tr><td>7</td><td>Fakultas</td><td>Sains dan Teknologi</td></tr>
       <tr><td>8</td><td>Perguruan Tinggi</td><td>Universitas Darussalam Gontor</td></tr>
-      <tr><td>9</td><td>Jabatan Fungsional / TMT</td><td>Lektor / 15 November 2021</td></tr>
+      <tr><td>9</td><td>Jabatan Fungsional / TMT</td><td>Lektor Kepala / 01 September 2025</td></tr>
       <tr><td>10</td><td>Pangkat dan Golongan / TMT</td><td>Penata Tk. I golongan ruang III/d / 1 Mei 2024</td></tr>
       <tr><td>12</td><td>Kualifikasi Profesi</td><td>Insinyur Profesional Pratama (IPP.)</td></tr>
       <tr><td>12</td><td>Agama</td><td>Islam</td></tr>
@@ -206,7 +206,7 @@
       <tr>
         <td>18</td>
         <td>Link Author SINTA</td>
-        <td><a href="https://sinta.kemdikbud.go.id/authors/profile/6190178">https://sinta.kemdikbud.go.id/authors/profile/6190178</a></td>
+        <td><a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6190178">https://sinta.kemdiktisaintek.go.id/authors/profile/6190178</a></td>
       </tr>
     </tbody>
   </table>
@@ -266,18 +266,24 @@
     <tbody>
       <tr>
         <td>1</td>
+        <td>2026</td>
+        <td>IEEE SMC Summer School, Nanjing, Tiongkok</td>
+        <td>IEEE SMC</td>
+      </tr>
+      <tr>
+        <td>2</td>
         <td>2023</td>
         <td>Sakura Science Program di Nara Institute of Science and Technology, Nara, Jepang</td>
         <td>Japan Science and Technology Agency (JST)</td>
       </tr>
       <tr>
-        <td>2</td>
+        <td>3</td>
         <td>2023</td>
         <td>International Joint Exchange Program (IJEP) Short-term di Kumamoto University, Kumamoto, Jepang</td>
         <td>MEXT</td>
       </tr>
       <tr>
-        <td>3</td>
+        <td>4</td>
         <td>2018</td>
         <td>PEKERTI</td>
         <td>Kopertis Wilayah VII</td>
@@ -299,15 +305,56 @@
     <tbody>
       <tr>
         <td>1</td>
-        <td>2017–sekarang</td>
+        <td>2017 - sekarang</td>
         <td>Dosen Program Studi Teknik Informatika, Universitas Darussalam Gontor</td>
         <td>Universitas Darussalam Gontor</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>2011–2015</td>
+        <td>2011 - 2015</td>
         <td>Senior Software Engineer</td>
         <td>PT Data Integra Dinamika</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>RIWAYAT PENDANAAN PENELITIAN (RESEARCH GRANTS)</h2>
+
+  <table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Tahun</th>
+        <th>Judul Penelitian</th>
+        <th>Program/Skema Pendanaan</th>
+        <th>Peran</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2026</td>
+        <td>Analisis Kemurnian Benih Secara Otomatis Menggunakan Framework Hibrida Visi Komputer Berbasis YOLOv8 dan Fusi Inter Modal</td>
+        <td>Program Riset dan Inovasi untuk Indonesia Maju (RIIM), Kompetisi Gelombang 11, Badan Riset dan Inovasi Nasional (BRIN)</td>
+        <td>Ketua Periset</td>
+        <td>Ditetapkan sebagai penerima</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2026</td>
+        <td>Pengembangan Feedback-Assistant for Rhetorical and Interactive Speaking (FARIS) Berbasis Natural Language Processing untuk Academic Speaking Mahasantri di Jawa Timur</td>
+        <td>Penelitian Fundamental Reguler, Direktorat Penelitian dan Pengabdian kepada Masyarakat melalui BIMA</td>
+        <td>Anggota</td>
+        <td>Didanai</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>2019</td>
+        <td>Restorasi Visibilitas Citra Berkabut Kawah Gunung Berapi Kelud Berbasis Color Attenuation Prior</td>
+        <td>Penelitian Dosen Pemula, Direktorat Penelitian dan Pengabdian kepada Masyarakat melalui BIMA</td>
+        <td>Ketua</td>
+        <td>Didanai</td>
       </tr>
     </tbody>
   </table>
@@ -324,44 +371,48 @@
   <h2>DAFTAR PUBLIKASI</h2>
   <h3>2026</h3>
   <ol>
-    <li>Human Pose Classification Using a Large Kernel Attention-driven 3D Transformer Model (PointLARKA) with LiDAR Point Cloud Features. 2026. International Journal of Intelligent Engineering and Systems, 19(2): 83–95.
+    <li>Voice Command Recognition for 3D Endless Games Using Hybrid Transformer LSTM. 2026. Teknika, 15(1): 1-10.
+  </li>
+    <li>Learning Temporal Graph Representations for Intelligent Control in 3D Endless Runner Games. 2026. Teknika, 15(1): 28-36.
+  </li>
+    <li>Human Pose Classification Using a Large Kernel Attention-driven 3D Transformer Model (PointLARKA) with LiDAR Point Cloud Features. 2026. International Journal of Intelligent Engineering and Systems, 19(2): 83-95.
   </li>
     <li>
       Widya Kurniawan, <b>Oddy Virgantara Putra</b>, dan Amelia Utami.
-      “Implementasi Algoritma Support Vector Machine untuk Klasifikasi Kesehatan Mental Mahasiswa Tingkat Akhir
-      pada Proses Penyusunan Skripsi Berdasarkan Filsafat Al-Wujud dalam Islam.”
-      <em>Jurnal Ilmiah IT CIDA</em>, 11(2), 69–83, 2026.
+       Implementasi Algoritma Support Vector Machine untuk Klasifikasi Kesehatan Mental Mahasiswa Tingkat Akhir
+      pada Proses Penyusunan Skripsi Berdasarkan Filsafat Al-Wujud dalam Islam.â€
+      <em>Jurnal Ilmiah IT CIDA</em>, 11(2), 69-83, 2026.
       DOI: <a href="https://doi.org/10.55635/jic.v11i2.295">https://doi.org/10.55635/jic.v11i2.295</a>
     </li>
   </ol>
   <h3>2025</h3>
   <ol>
-    <li>Ghulam Asrofi Buntoro, <b>Oddy Virgantara Putra</b>, and Mauridhi Hery Purnomo, “Domain-Adaptive Fine-Tuning of BioMedBERT for Medical Text Classification”, Eng. Technol. Appl. Sci. Res., vol. 15, no. 6, pp. 28523–28529, Dec. 2025.
+    <li>Ghulam Asrofi Buntoro, <b>Oddy Virgantara Putra</b>, and Mauridhi Hery Purnomo, â€œDomain-Adaptive Fine-Tuning of BioMedBERT for Medical Text Classificationâ€, Eng. Technol. Appl. Sci. Res., vol. 15, no. 6, pp. 28523-28529, Dec. 2025.
     </li>
     <li>
       Farah Zakiyah Rahmanti, Moch Iskandar Riansyah, Oddy Virgantara Putra, Eko Mulyanto Yuniarno, Mauridhi Hery Purnomo. "3D human pose point cloud data of light detection and ranging (LiDAR)" https://www.sciencedirect.com/science/article/pii/S2352340925007656
     </li>
     <li>
       Oddy Virgantara Putra, Hanugra Aulia Sidharta, Diah Risqiwati, Moch Iskandar Riansyah, Yuni Yamasari. (2025).
-      “BeyondRPC: A Contrastive and Augmentation-Driven Framework for Robust Point Cloud Understanding.”
+      â€œBeyondRPC: A Contrastive and Augmentation-Driven Framework for Robust Point Cloud Understanding.â€
       International Journal of Intelligent Engineering and Systems, 18(6), 2025. 672-682. (Q2)
       https://doi.org/10.22266/ijies2025.0731.42
     </li>
     <li>
       Farah Zakiyah Rahmanti, Moch Riansyah, Oddy Virgantara Putra, Eko Mulyanto Yuniarno, Mauridhi Hery Purnomo. (2025).
-      “Human Pose Prediction Using Convolution Neural Network 3D based on Binary Voxel Feature Extraction (BIVFE) of Light
-      Detection and Ranging (LiDAR) Point Cloud Data”
+      â€œHuman Pose Prediction Using Convolution Neural Network 3D based on Binary Voxel Feature Extraction (BIVFE) of Light
+      Detection and Ranging (LiDAR) Point Cloud Dataâ€
       International Journal of Intelligent Engineering and Systems, 18(6), 2025. 301-317. (Q2)
       https://doi.org/10.22266/ijies2025.0731.19
     </li>
     <li>
       Rahmah Soraya Kamila, Triana Harmini, Oddy Virgantara Putra. (2025).
-      “Pengembangan Media Pembelajaran Gerund Menggunakan Scramble Game Untuk Siswi Pondok Modern Darussalam Gontor”.
+      â€œPengembangan Media Pembelajaran Gerund Menggunakan Scramble Game Untuk Siswi Pondok Modern Darussalam Gontorâ€.
       Prosiding Seminar Nasional Teknologi dan Sains. Universitas.
     </li>
     <li>
       Oddy Virgantara Putra, Kohichi Ogata, Eko Mulyanto Yuniarno, Mauridhi Hery Purnomo. (2025).
-      “AdaCrossNet: Adaptive Dynamic Loss Weighting for Cross-Modal Contrastive Point Cloud Learning.”
+      â€œAdaCrossNet: Adaptive Dynamic Loss Weighting for Cross-Modal Contrastive Point Cloud Learning.â€
       International Journal of Intelligent Engineering and Systems, 18(1), 2025. 134-146. (Q2)
       https://doi.org/10.22266/ijies2025.0229.11
     </li>
@@ -377,13 +428,13 @@
     </li>
     <li>
       Dellyan Achmad, Oddy Virgantara Putra, Dihin Muriyatmoko. (2024).
-      “Image classification of leaf disease in corn plants (Zea Mays L.) using the MobileNetV2 method.”
+      â€œImage classification of leaf disease in corn plants (Zea Mays L.) using the MobileNetV2 method.â€
       Journal of Information System and Application Development, 2(2), 2024. 111-121.
       https://doi.org/10.26905/jisad.v2i2.14004
     </li>
     <li>
       Edy Mulyanto, Eko Mulyanto Yuniarno, Oddy Virgantara Putra, Isa Hafidz, Ardyono Priyadi, Mauridhi H Purnomo. (2024).
-      “Improvement of Tradition Dance Classification Process Using Video Vision Transformer based on Tubelet Embedding.”
+      â€œImprovement of Tradition Dance Classification Process Using Video Vision Transformer based on Tubelet Embedding.â€
       International Journal of Intelligent Engineering and Systems, 17(4), 2024. 530-544. (Q2)
       https://doi.org/10.22266/ijies2024.0831.41
     </li>
@@ -391,7 +442,7 @@
       Oddy Virgantara Putra, A. Priyadi, K. Ogata, E. M. Yuniarno and M. H. Purnomo,
       "DGONN: Depthwise Dynamic Graph Overparameterized Neural Network for 3D Point Cloud Object Recognition,"
       2024 IEEE International Conference on Computational Intelligence and Virtual Environments for Measurement Systems and
-      Applications (CIVEMSA), Xi’an, China, 2024, pp. 1-6, doi: 10.1109/CIVEMSA58715.2024.10586619.
+      Applications (CIVEMSA), Xiâ€™an, China, 2024, pp. 1-6, doi: 10.1109/CIVEMSA58715.2024.10586619.
     </li>
   </ol>
 
@@ -418,15 +469,27 @@
    
     <li>
       Irmalia Suryani Faradisa, Oddy Virgantara Putra, Tri Arief Sardjono, Mauridhi Hery Purnomo. (2023).
-      “Arrhythmia Foetus Heartbeat Detection Using Optimized Neural Network Based on Phonocardiograph Ensemble Feature and
-      Principal Component Analysis.” International Journal of Intelligent Engineering and Systems, 16(1), 2023. 561-571. (Q2)
+      â€œArrhythmia Foetus Heartbeat Detection Using Optimized Neural Network Based on Phonocardiograph Ensemble Feature and
+      Principal Component Analysis.â€ International Journal of Intelligent Engineering and Systems, 16(1), 2023. 561-571. (Q2)
       https://doi.org/10.22266/ijies2023.0228.48
     </li>
     <li>
       Yuni Yamasari, Anita Qoiriah, Naim Rochmawati, Rafif Aydin Ahmad, Oddy Virgantara Putra. (2023).
-      “Detecting Students' Behavior on the E-Learning System Using SVM Kernels-Based Ensemble Learning Algorithm.”
+      â€œDetecting Students' Behavior on the E-Learning System Using SVM Kernels-Based Ensemble Learning Algorithm.â€
       International Journal of Intelligent Engineering and Systems, 16(1), 2023. 142-153. (Q2)
       https://doi.org/10.22266/ijies2023.0228.13
+    </li>
+  
+  </ol>
+  <h3>2022</h3>
+  <ol>
+    <li>
+     Oddy Virgantara Putra, Niken Trisnaningrum, Niken Sylvia Puspitasari, Agung Toto Wiboto, Ema Rachmawaty. (2022).
+      HiT-LIDIA: A Framework for Rice Leaf Disease Classification using Ensemble and Hierarchical Transfer Learning. LONTAR KOMPUTER, 13, 196-207. 
+    </li>
+    <li>
+     Oddy Virgantara Putra, Isa Hafidz, Ardyono Priyadi, Mauridhi Hery Purnomo. (2022).
+      Implementation of Extreme Learning Machine to Predict Distribution Power Transformer Lifetime., International Review of Electrical Engineering, 17(5), 536. https://doi.org/10.15866/iree.v17i5.22021
     </li>
   
   </ol>
@@ -434,7 +497,7 @@
   
 
 <div class="signature">
-  <p>Ponorogo, April 2026</p>
+  <p>Ponorogo, 20 Juli 2026</p>
   <p>Yang Membuat,</p>
   <br/><br/>
   <p><strong>Dr. Ir. Oddy Virgantara Putra, S.Kom., M.T., IPP.</strong></p>
