@@ -380,39 +380,39 @@
     <li>
       Widya Kurniawan, <b>Oddy Virgantara Putra</b>, dan Amelia Utami.
        Implementasi Algoritma Support Vector Machine untuk Klasifikasi Kesehatan Mental Mahasiswa Tingkat Akhir
-      pada Proses Penyusunan Skripsi Berdasarkan Filsafat Al-Wujud dalam Islam.â€
+      pada Proses Penyusunan Skripsi Berdasarkan Filsafat Al-Wujud dalam Islam. 
       <em>Jurnal Ilmiah IT CIDA</em>, 11(2), 69-83, 2026.
       DOI: <a href="https://doi.org/10.55635/jic.v11i2.295">https://doi.org/10.55635/jic.v11i2.295</a>
     </li>
   </ol>
   <h3>2025</h3>
   <ol>
-    <li>Ghulam Asrofi Buntoro, <b>Oddy Virgantara Putra</b>, and Mauridhi Hery Purnomo, â€œDomain-Adaptive Fine-Tuning of BioMedBERT for Medical Text Classificationâ€, Eng. Technol. Appl. Sci. Res., vol. 15, no. 6, pp. 28523-28529, Dec. 2025.
+    <li>Ghulam Asrofi Buntoro, <b>Oddy Virgantara Putra</b>, and Mauridhi Hery Purnomo,  Domain-Adaptive Fine-Tuning of BioMedBERT for Medical Text Classification , Eng. Technol. Appl. Sci. Res., vol. 15, no. 6, pp. 28523-28529, Dec. 2025.
     </li>
     <li>
       Farah Zakiyah Rahmanti, Moch Iskandar Riansyah, Oddy Virgantara Putra, Eko Mulyanto Yuniarno, Mauridhi Hery Purnomo. "3D human pose point cloud data of light detection and ranging (LiDAR)" https://www.sciencedirect.com/science/article/pii/S2352340925007656
     </li>
     <li>
       Oddy Virgantara Putra, Hanugra Aulia Sidharta, Diah Risqiwati, Moch Iskandar Riansyah, Yuni Yamasari. (2025).
-      â€œBeyondRPC: A Contrastive and Augmentation-Driven Framework for Robust Point Cloud Understanding.â€
+       BeyondRPC: A Contrastive and Augmentation-Driven Framework for Robust Point Cloud Understanding. 
       International Journal of Intelligent Engineering and Systems, 18(6), 2025. 672-682. (Q2)
       https://doi.org/10.22266/ijies2025.0731.42
     </li>
     <li>
       Farah Zakiyah Rahmanti, Moch Riansyah, Oddy Virgantara Putra, Eko Mulyanto Yuniarno, Mauridhi Hery Purnomo. (2025).
-      â€œHuman Pose Prediction Using Convolution Neural Network 3D based on Binary Voxel Feature Extraction (BIVFE) of Light
-      Detection and Ranging (LiDAR) Point Cloud Dataâ€
+       Human Pose Prediction Using Convolution Neural Network 3D based on Binary Voxel Feature Extraction (BIVFE) of Light
+      Detection and Ranging (LiDAR) Point Cloud Data 
       International Journal of Intelligent Engineering and Systems, 18(6), 2025. 301-317. (Q2)
       https://doi.org/10.22266/ijies2025.0731.19
     </li>
     <li>
       Rahmah Soraya Kamila, Triana Harmini, Oddy Virgantara Putra. (2025).
-      â€œPengembangan Media Pembelajaran Gerund Menggunakan Scramble Game Untuk Siswi Pondok Modern Darussalam Gontorâ€.
+       Pengembangan Media Pembelajaran Gerund Menggunakan Scramble Game Untuk Siswi Pondok Modern Darussalam Gontor .
       Prosiding Seminar Nasional Teknologi dan Sains. Universitas.
     </li>
     <li>
       Oddy Virgantara Putra, Kohichi Ogata, Eko Mulyanto Yuniarno, Mauridhi Hery Purnomo. (2025).
-      â€œAdaCrossNet: Adaptive Dynamic Loss Weighting for Cross-Modal Contrastive Point Cloud Learning.â€
+       AdaCrossNet: Adaptive Dynamic Loss Weighting for Cross-Modal Contrastive Point Cloud Learning. 
       International Journal of Intelligent Engineering and Systems, 18(1), 2025. 134-146. (Q2)
       https://doi.org/10.22266/ijies2025.0229.11
     </li>
@@ -428,13 +428,13 @@
     </li>
     <li>
       Dellyan Achmad, Oddy Virgantara Putra, Dihin Muriyatmoko. (2024).
-      â€œImage classification of leaf disease in corn plants (Zea Mays L.) using the MobileNetV2 method.â€
+       Image classification of leaf disease in corn plants (Zea Mays L.) using the MobileNetV2 method. 
       Journal of Information System and Application Development, 2(2), 2024. 111-121.
       https://doi.org/10.26905/jisad.v2i2.14004
     </li>
     <li>
       Edy Mulyanto, Eko Mulyanto Yuniarno, Oddy Virgantara Putra, Isa Hafidz, Ardyono Priyadi, Mauridhi H Purnomo. (2024).
-      â€œImprovement of Tradition Dance Classification Process Using Video Vision Transformer based on Tubelet Embedding.â€
+       Improvement of Tradition Dance Classification Process Using Video Vision Transformer based on Tubelet Embedding. 
       International Journal of Intelligent Engineering and Systems, 17(4), 2024. 530-544. (Q2)
       https://doi.org/10.22266/ijies2024.0831.41
     </li>
@@ -469,13 +469,13 @@
    
     <li>
       Irmalia Suryani Faradisa, Oddy Virgantara Putra, Tri Arief Sardjono, Mauridhi Hery Purnomo. (2023).
-      â€œArrhythmia Foetus Heartbeat Detection Using Optimized Neural Network Based on Phonocardiograph Ensemble Feature and
-      Principal Component Analysis.â€ International Journal of Intelligent Engineering and Systems, 16(1), 2023. 561-571. (Q2)
+       Arrhythmia Foetus Heartbeat Detection Using Optimized Neural Network Based on Phonocardiograph Ensemble Feature and
+      Principal Component Analysis. International Journal of Intelligent Engineering and Systems, 16(1), 2023. 561-571. (Q2)
       https://doi.org/10.22266/ijies2023.0228.48
     </li>
     <li>
       Yuni Yamasari, Anita Qoiriah, Naim Rochmawati, Rafif Aydin Ahmad, Oddy Virgantara Putra. (2023).
-      â€œDetecting Students' Behavior on the E-Learning System Using SVM Kernels-Based Ensemble Learning Algorithm.â€
+       Detecting Students' Behavior on the E-Learning System Using SVM Kernels-Based Ensemble Learning Algorithm. 
       International Journal of Intelligent Engineering and Systems, 16(1), 2023. 142-153. (Q2)
       https://doi.org/10.22266/ijies2023.0228.13
     </li>
