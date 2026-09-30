@@ -10,7 +10,7 @@
           <a class="nav-link" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="linear_regression.php">Linear Regression</a>
+          <a class="nav-link" href="machine_learning/index.php">Machine Learning</a>
         </li>
          <li class="nav-item">
           <a class="nav-link" href="nn/index.php">Neural Network</a>
