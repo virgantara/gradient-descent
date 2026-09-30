@@ -25,5 +25,14 @@
                 y = c + m₁x₁ + m₂x₂ + ... + mₙxₙ.
             </p>
         </a>
+
+        <a class="menu-card" href="neural-network.php">
+            <div class="eyebrow">Machine Learning</div>
+            <h2>Neural Network dari Nol</h2>
+            <p>
+                Jaringan 2 input → 2 hidden → 1 output dengan sigmoid,
+                MSE, backpropagation, dan stochastic gradient descent.
+            </p>
+        </a>
     </div>
 </main>

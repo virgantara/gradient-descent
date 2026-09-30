@@ -1,5 +1,4 @@
 <main class="container">
-<div class="container">
     <h1>Linear Regression dengan Gradient Descent</h1>
 
     <div class="subtitle">
@@ -172,7 +171,6 @@
             dari model pada epoch yang sedang aktif.
         </div>
     </div>
-</div>
 
 <script>
 const points = <?= json_encode($points, JSON_NUMERIC_CHECK) ?>;

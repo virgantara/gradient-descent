@@ -125,7 +125,7 @@ input {
 
 .nav-dropdown-menu {
     position: absolute;
-    top: calc(100% + 8px);
+    top: 100%;
     right: 0;
     display: none;
     width: 290px;
@@ -430,5 +430,542 @@ input {
 
     .canvas-wrap {
         height: 340px;
+    }
+}
+
+
+/* ==========================================================================
+   Single Variable Linear Regression
+   ========================================================================== */
+
+.page-linear-regression-single .subtitle,
+.page-linear-regression-single .section-desc {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.page-linear-regression-single .subtitle {
+    margin-bottom: 24px;
+}
+
+.page-linear-regression-single .alert {
+    padding: 14px 16px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    color: #991b1b;
+    line-height: 1.6;
+}
+
+.page-linear-regression-single .step-box {
+    margin-top: 16px;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.page-linear-regression-single .step-title {
+    margin-bottom: 8px;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.page-linear-regression-single .step-text {
+    color: #334155;
+    line-height: 1.65;
+}
+
+.page-linear-regression-single .formula-box {
+    margin-top: 12px;
+    padding: 13px 15px;
+    overflow-x: auto;
+    background: #eff6ff;
+    border-radius: 10px;
+    color: #1d4ed8;
+    font-family: "Courier New", monospace;
+    line-height: 1.55;
+}
+
+.page-linear-regression-single .train-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.page-linear-regression-single .loss-wrap {
+    height: 250px;
+}
+
+.page-linear-regression-single .loss-wrap canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.page-linear-regression-single .range-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.page-linear-regression-single .range-row input {
+    width: 100%;
+}
+
+.page-linear-regression-single .summary-list {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.page-linear-regression-single .note {
+    margin-top: 14px;
+    color: #475569;
+    line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+    .page-linear-regression-single .train-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* ==========================================================================
+   UI fixes / refinements
+   ========================================================================== */
+
+/*
+ * Some pages use only .btn-primary / .btn-secondary without .btn.
+ * Make every button variant self-contained.
+ */
+.btn,
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        background-color .18s ease,
+        color .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        transform .08s ease;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e1;
+    color: #0f172a;
+}
+
+.btn:active,
+.btn-primary:active,
+.btn-secondary:active {
+    transform: translateY(1px);
+}
+
+.btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .16);
+}
+
+button:disabled,
+.btn:disabled,
+.btn-primary:disabled,
+.btn-secondary:disabled {
+    cursor: not-allowed;
+    opacity: .55;
+    transform: none;
+}
+
+/*
+ * Single regression has 4 fields + action button.
+ */
+.page-linear-regression-single .input-form {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+}
+
+.page-linear-regression-single .input-action {
+    align-items: stretch;
+}
+
+.page-linear-regression-single .input-action .btn-primary,
+.page-linear-regression-single .input-action button {
+    min-width: 110px;
+    height: 42px;
+}
+
+/*
+ * Main heading area.
+ */
+.page-linear-regression-single h1 {
+    margin: 0 0 6px;
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.2;
+}
+
+.page-linear-regression-single .subtitle {
+    max-width: 850px;
+    margin-bottom: 26px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+/*
+ * Cards / section text.
+ */
+.page-linear-regression-single .card {
+    overflow: hidden;
+}
+
+.page-linear-regression-single .card > h2 {
+    margin-bottom: 8px;
+    font-size: clamp(20px, 2vw, 25px);
+}
+
+.page-linear-regression-single .section-desc {
+    margin-bottom: 18px;
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+/*
+ * Canvas must have a stable CSS height so JS getBoundingClientRect()
+ * receives a useful size.
+ */
+.page-linear-regression-single .canvas-wrap {
+    position: relative;
+    width: 100%;
+    height: 440px;
+    min-height: 320px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.page-linear-regression-single .canvas-wrap canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+ * Training layout.
+ */
+.page-linear-regression-single .train-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(300px, .8fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.page-linear-regression-single .train-layout > div {
+    min-width: 0;
+}
+
+.page-linear-regression-single .stats-grid {
+    gap: 12px;
+}
+
+.page-linear-regression-single .stat {
+    min-width: 0;
+    padding: 14px 15px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+}
+
+.page-linear-regression-single .stat-name {
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.page-linear-regression-single .stat-value {
+    color: #0f172a;
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+/*
+ * Explanation / formula blocks.
+ */
+.page-linear-regression-single .step-box {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.page-linear-regression-single .step-title {
+    margin-bottom: 8px;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.page-linear-regression-single .step-text {
+    color: #334155;
+    line-height: 1.65;
+}
+
+.page-linear-regression-single .formula-box {
+    margin-top: 12px;
+    padding: 13px 15px;
+    overflow-x: auto;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/*
+ * Controls.
+ */
+.page-linear-regression-single .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 16px;
+}
+
+.page-linear-regression-single .controls button {
+    flex: 0 0 auto;
+}
+
+/*
+ * Epoch slider.
+ */
+.page-linear-regression-single .range-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) minmax(42px, auto);
+    gap: 12px;
+    align-items: center;
+    margin-top: 16px;
+    padding: 11px 13px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.page-linear-regression-single .range-row span {
+    color: #475569;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.page-linear-regression-single .range-row strong {
+    min-width: 42px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    background: #e0e7ff;
+    color: #3730a3;
+    text-align: center;
+    font-size: 13px;
+}
+
+.page-linear-regression-single input[type="range"] {
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+/*
+ * Loss chart.
+ */
+.page-linear-regression-single .loss-wrap {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    min-height: 240px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.page-linear-regression-single .loss-wrap canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+ * Final result.
+ */
+.page-linear-regression-single .summary-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.page-linear-regression-single .summary-list li {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #f8fafc;
+    overflow-wrap: anywhere;
+}
+
+.page-linear-regression-single .summary-list li:last-child {
+    grid-column: 1 / -1;
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #1d4ed8;
+}
+
+.page-linear-regression-single .note {
+    margin-top: 16px;
+    padding: 13px 15px;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    background: #fffbeb;
+    color: #92400e;
+    line-height: 1.65;
+}
+
+/*
+ * Alert.
+ */
+.page-linear-regression-single .alert {
+    padding: 14px 16px;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #991b1b;
+    line-height: 1.6;
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+    .page-linear-regression-single .input-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-linear-regression-single .input-action {
+        grid-column: 1 / -1;
+    }
+
+    .page-linear-regression-single .input-action button {
+        width: 100%;
+    }
+
+    .page-linear-regression-single .train-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .page-linear-regression-single .train-layout > div:last-child {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .page-linear-regression-single .train-layout > div:last-child .stats-grid {
+        grid-column: 1 / -1;
+    }
+
+    .page-linear-regression-single .train-layout > div:last-child .step-box {
+        margin-top: 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .page-linear-regression-single .input-form {
+        grid-template-columns: 1fr;
+    }
+
+    .page-linear-regression-single .input-action {
+        grid-column: auto;
+    }
+
+    .page-linear-regression-single .canvas-wrap {
+        height: 340px;
+        min-height: 300px;
+    }
+
+    .page-linear-regression-single .loss-wrap {
+        height: 270px;
+    }
+
+    .page-linear-regression-single .controls {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-linear-regression-single .controls button {
+        width: 100%;
+        white-space: normal;
+    }
+
+    .page-linear-regression-single .train-layout > div:last-child {
+        display: block;
+    }
+
+    .page-linear-regression-single .train-layout > div:last-child .step-box {
+        margin-top: 16px;
+    }
+
+    .page-linear-regression-single .summary-list {
+        grid-template-columns: 1fr;
+    }
+
+    .page-linear-regression-single .summary-list li:last-child {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 430px) {
+    .page-linear-regression-single .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .page-linear-regression-single .range-row {
+        grid-template-columns: 1fr auto;
+    }
+
+    .page-linear-regression-single .range-row input {
+        grid-column: 1 / -1;
+        grid-row: 2;
     }
 }

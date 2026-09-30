@@ -5,6 +5,7 @@ $currentPage = basename($_SERVER['SCRIPT_NAME'] ?? '');
 $machineLearningPages = [
     'linear-regression-single.php',
     'linear-regression-multiple.php',
+    'neural-network.php',
 ];
 
 $isMachineLearningActive = in_array($currentPage, $machineLearningPages, true);
@@ -47,6 +48,14 @@ $isMachineLearningActive = in_array($currentPage, $machineLearningPages, true);
                         <?= $currentPage === 'linear-regression-multiple.php' ? 'aria-current="page"' : '' ?>
                     >
                         Regresi Linier Multiple Variabel
+                    </a>
+
+                    <a
+                        href="neural-network.php"
+                        class="<?= $currentPage === 'neural-network.php' ? 'active' : '' ?>"
+                        <?= $currentPage === 'neural-network.php' ? 'aria-current="page"' : '' ?>
+                    >
+                        Neural Network dari Nol
                     </a>
                 </div>
             </div>
