@@ -13,7 +13,7 @@ $methodPages = [
 ?>
 <header class="site-header">
     <div class="site-header-inner">
-        <a class="site-brand" href="biseksi.php">
+        <a class="site-brand" href="index.php">
             <span class="site-brand-title">Metode Akar Persamaan</span>
             <span class="site-brand-subtitle">Visualisasi Metode Numerik</span>
         </a>
