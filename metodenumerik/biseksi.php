@@ -5,28 +5,79 @@ function f($x)
     return $x ** 2 - 2;
 }
 
-function hitungBiseksi($a, $b, $step = 10, $batas_selisih = 1e-10)
+function hitungBiseksi($a, $b, $step = 10, $batasSelisih = 1e-10)
 {
     $hasil = [];
-
+    $cSebelumnya = null;
     $fa = f($a);
     $fb = f($b);
 
+    if ($a >= $b) {
+        return [
+            'success' => false,
+            'message' => 'Nilai a harus lebih kecil dari b.',
+            'iterations' => [],
+        ];
+    }
+
+    if (abs($fa) < $batasSelisih) {
+        return [
+            'success' => true,
+            'message' => null,
+            'iterations' => [[
+                'iterasi' => 0,
+                'a' => $a,
+                'b' => $b,
+                'c' => $a,
+                'fa' => $fa,
+                'fb' => $fb,
+                'fc' => $fa,
+                'error_interval' => 0,
+                'error_c' => null,
+            ]],
+        ];
+    }
+
+    if (abs($fb) < $batasSelisih) {
+        return [
+            'success' => true,
+            'message' => null,
+            'iterations' => [[
+                'iterasi' => 0,
+                'a' => $a,
+                'b' => $b,
+                'c' => $b,
+                'fa' => $fa,
+                'fb' => $fb,
+                'fc' => $fb,
+                'error_interval' => 0,
+                'error_c' => null,
+            ]],
+        ];
+    }
+
     if ($fa * $fb > 0) {
         return [
-            'error' => 'Interval tidak mengapit akar'
+            'success' => false,
+            'message' => sprintf(
+                'Interval [%.10g, %.10g] tidak memenuhi syarat awal biseksi karena f(a) = %.10g dan f(b) = %.10g bertanda sama. Interval mungkin tetap mengandung akar, tetapi metode biseksi klasik membutuhkan f(a) × f(b) < 0.',
+                $a,
+                $b,
+                $fa,
+                $fb
+            ),
+            'iterations' => [],
         ];
     }
 
     for ($i = 1; $i <= $step; $i++) {
-
         $c = ($a + $b) / 2;
-
         $fa = f($a);
         $fb = f($b);
         $fc = f($c);
+        $errorInterval = abs($b - $a) / 2;
+        $errorC = $cSebelumnya === null ? null : abs($c - $cSebelumnya);
 
-        // Simpan kondisi SEBELUM interval diperbarui
         $hasil[] = [
             'iterasi' => $i,
             'a' => $a,
@@ -35,9 +86,11 @@ function hitungBiseksi($a, $b, $step = 10, $batas_selisih = 1e-10)
             'fa' => $fa,
             'fb' => $fb,
             'fc' => $fc,
+            'error_interval' => $errorInterval,
+            'error_c' => $errorC,
         ];
 
-        if (abs($fc) < $batas_selisih) {
+        if (abs($fc) < $batasSelisih) {
             break;
         }
 
@@ -46,697 +99,573 @@ function hitungBiseksi($a, $b, $step = 10, $batas_selisih = 1e-10)
         } else {
             $a = $c;
         }
+
+        $cSebelumnya = $c;
     }
 
-    return $hasil;
+    return [
+        'success' => true,
+        'message' => null,
+        'iterations' => $hasil,
+    ];
 }
 
-$a = 1;
-$b = 2;
+$a = isset($_GET['a']) && is_numeric($_GET['a']) ? (float) $_GET['a'] : 0;
+$b = isset($_GET['b']) && is_numeric($_GET['b']) ? (float) $_GET['b'] : 2;
+$step = isset($_GET['step']) ? max(1, min(100, (int) $_GET['step'])) : 10;
 
-$hasil = hitungBiseksi($a, $b, 10);
+$hasilBiseksi = hitungBiseksi($a, $b, $step);
+$isValid = $hasilBiseksi['success'];
+$errorMessage = $hasilBiseksi['message'];
+$hasil = $hasilBiseksi['iterations'];
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Animasi Metode Biseksi</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8fafc;
-            margin: 0;
-            padding: 40px;
-            color: #1e293b;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        h1 {
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            color: #64748b;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 14px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,.08);
-            margin-bottom: 25px;
-        }
-
-        .iteration-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .number-line-wrapper {
-            position: relative;
-            height: 150px;
-            margin: 20px 25px;
-        }
-
-        .number-line {
-            position: absolute;
-            top: 70px;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: #cbd5e1;
-            border-radius: 5px;
-        }
-
-        .active-interval {
-            position: absolute;
-            top: 70px;
-            height: 5px;
-            background: #2563eb;
-            transition:
-                left 0.8s ease,
-                width 0.8s ease;
-        }
-
-        .point {
-            position: absolute;
-            top: 55px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            transform: translateX(-50%);
-            transition: left 0.8s ease;
-        }
-
-        .point-a {
-            background: #ef4444;
-        }
-
-        .point-b {
-            background: #22c55e;
-        }
-
-        .point-c {
-            background: #f59e0b;
-            width: 24px;
-            height: 24px;
-            top: 53px;
-            box-shadow: 0 0 0 6px rgba(245,158,11,.2);
-        }
-
-        .label {
-            position: absolute;
-            transform: translateX(-50%);
-            font-weight: bold;
-            transition: left 0.8s ease;
-            white-space: nowrap;
-        }
-
-        .label-a {
-            top: 90px;
-            color: #ef4444;
-        }
-
-        .label-b {
-            top: 90px;
-            color: #16a34a;
-        }
-
-        .label-c {
-            top: 20px;
-            color: #d97706;
-        }
-
-        .axis-label {
-            position: absolute;
-            top: 95px;
-            transform: translateX(-50%);
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .info {
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .info .name {
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .info .value {
-            margin-top: 5px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .decision {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            background: #eff6ff;
-            color: #1d4ed8;
-            font-weight: bold;
-        }
-
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        button {
-            border: none;
-            padding: 11px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background: #2563eb;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #e2e8f0;
-            color: #334155;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border-bottom: 1px solid #e2e8f0;
-            padding: 10px;
-            text-align: right;
-        }
-
-        th:first-child,
-        td:first-child {
-            text-align: center;
-        }
-
-        th {
-            background: #f8fafc;
-        }
-
-        .active-row {
-            background: #fef3c7;
-        }
-
-        @media(max-width: 700px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/metode-akar.css">
 </head>
 
-<body>
+<body class="page-biseksi">
+
+<?php require __DIR__ . '/partials/navbar.php'; ?>
 
 <div class="container">
-
-    <h1>Metode Biseksi</h1>
-
-    <div class="subtitle">
-        Fungsi:
-        <strong>
-            f(x) = x² - 2
-        </strong>
+    <h1>Animasi Metode Biseksi</h1>
+    <form method="GET" class="input-form">
+    <div class="input-group">
+        <label for="a">Batas kiri (a)</label>
+        <input
+            type="number"
+            step="any"
+            id="a"
+            name="a"
+            value="<?= htmlspecialchars((string) $a, ENT_QUOTES, 'UTF-8') ?>"
+            required
+        >
     </div>
+
+    <div class="input-group">
+        <label for="b">Batas kanan (b)</label>
+        <input
+            type="number"
+            step="any"
+            id="b"
+            name="b"
+            value="<?= htmlspecialchars((string) $b, ENT_QUOTES, 'UTF-8') ?>"
+            required
+        >
+    </div>
+
+    <div class="input-group">
+        <label for="step">Batas Iterasi</label>
+        <input
+            type="number"
+            id="step"
+            name="step"
+            min="1"
+            max="100"
+            value="<?= $step ?>"
+            required
+        >
+    </div>
+
+    <div class="input-action">
+        <button type="submit" class="btn-primary">
+            Hitung
+        </button>
+    </div>
+</form>
+    <div class="subtitle">
+    Fungsi:
+    <strong>f(x) = x² - 2</strong>
+
+    dengan interval awal
+    <strong>[<?= $a ?>, <?= $b ?>]</strong>
+
+    dan maksimum
+    <strong><?= $step ?> iterasi</strong>
+</div>
+
+    <?php if (!$isValid): ?>
+        <div class="alert alert-error">
+            <strong>Interval belum memenuhi syarat biseksi.</strong><br>
+            <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
+        </div>
+    <?php endif; ?>
 
     <div class="card">
 
-        <div
-            class="iteration-title"
-            id="iterationTitle"
-        >
-            Iterasi 1
+        <div class="iteration-title" id="iterationTitle">
+            <?= $isValid ? 'Iterasi 1' : 'Animasi tidak tersedia' ?>
         </div>
 
         <div class="number-line-wrapper">
-
             <div class="number-line"></div>
+            <div id="activeInterval" class="active-interval"></div>
 
-            <div
-                id="activeInterval"
-                class="active-interval"
-            ></div>
+            <div id="pointA" class="point point-a"></div>
+            <div id="pointB" class="point point-b"></div>
+            <div id="pointC" class="point point-c"></div>
 
-            <div
-                id="pointA"
-                class="point point-a"
-            ></div>
+            <div id="labelA" class="label label-a"></div>
+            <div id="labelB" class="label label-b"></div>
+            <div id="labelC" class="label label-c"></div>
 
-            <div
-                id="pointB"
-                class="point point-b"
-            ></div>
-
-            <div
-                id="pointC"
-                class="point point-c"
-            ></div>
-
-            <div
-                id="labelA"
-                class="label label-a"
-            ></div>
-
-            <div
-                id="labelB"
-                class="label label-b"
-            ></div>
-
-            <div
-                id="labelC"
-                class="label label-c"
-            ></div>
-
-            <div
-                class="axis-label"
-                style="left:0%"
-            >
-                <?= $a ?>
-            </div>
-
-            <div
-                class="axis-label"
-                style="left:100%"
-            >
-                <?= $b ?>
-            </div>
-
+            <div class="axis-label" style="left: 0%"><?= $a ?></div>
+            <div class="axis-label" style="left: 100%"><?= $b ?></div>
         </div>
 
         <div class="info-grid">
-
             <div class="info">
-                <div class="name">a</div>
-                <div
-                    class="value"
-                    id="valueA"
-                ></div>
+                <div class="name">Batas kiri (a)</div>
+                <div class="value" id="valueA">-</div>
             </div>
 
             <div class="info">
-                <div class="name">c = (a + b) / 2</div>
-                <div
-                    class="value"
-                    id="valueC"
-                ></div>
+                <div class="name">Titik tengah c = (a+b)/2</div>
+                <div class="value" id="valueC">-</div>
             </div>
 
             <div class="info">
-                <div class="name">b</div>
-                <div
-                    class="value"
-                    id="valueB"
-                ></div>
+                <div class="name">Batas kanan (b)</div>
+                <div class="value" id="valueB">-</div>
             </div>
-
         </div>
 
-        <div
-            class="decision"
-            id="decision"
-        ></div>
+        <div class="error-grid">
+            <div class="error-box">
+                <div class="error-name">Error interval <strong>|b-a| / 2</strong></div>
+                <div class="error-value" id="errorInterval">-</div>
+            </div>
+
+            <div class="error-box">
+                <div class="error-name">Perubahan pendekatan <strong>|cᵢ - cᵢ₋₁|</strong></div>
+                <div class="error-value" id="errorC">-</div>
+            </div>
+        </div>
+
+        <div class="decision" id="decision">
+            <?= $isValid ? '' : 'Pilih interval dengan f(a) dan f(b) berlainan tanda untuk menjalankan animasi.' ?>
+        </div>
 
         <div class="controls">
-
-            <button
-                class="btn-secondary"
-                onclick="previousStep()"
-            >
-                ← Sebelumnya
-            </button>
-
-            <button
-                class="btn-primary"
-                onclick="nextStep()"
-            >
-                Berikutnya →
-            </button>
-
-            <button
-                class="btn-primary"
-                onclick="playAnimation()"
-            >
-                ▶ Play
-            </button>
-
-            <button
-                class="btn-secondary"
-                onclick="resetAnimation()"
-            >
-                Reset
-            </button>
-
+            <button class="btn-secondary" onclick="previousStep()" <?= $isValid ? '' : 'disabled' ?>>← Sebelumnya</button>
+            <button class="btn-primary" onclick="nextStep()" <?= $isValid ? '' : 'disabled' ?>>Berikutnya →</button>
+            <button class="btn-primary" onclick="playAnimation()" <?= $isValid ? '' : 'disabled' ?>>▶ Play</button>
+            <button class="btn-secondary" onclick="pauseAnimation()" <?= $isValid ? '' : 'disabled' ?>>⏸ Pause</button>
+            <button class="btn-secondary" onclick="resetAnimation()" <?= $isValid ? '' : 'disabled' ?>>↺ Reset</button>
         </div>
-
     </div>
 
+    <div class="card">
+        <h2>Kurva Konvergensi Error</h2>
+
+        <div class="chart-description">
+            Grafik menunjukkan bagaimana error semakin kecil pada setiap iterasi metode biseksi.
+        </div>
+
+        <div class="chart-container">
+            <canvas id="errorChart"></canvas>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-line legend-interval"></div>
+                Error interval: |b-a| / 2
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-line legend-c"></div>
+                Perubahan c: |cᵢ-cᵢ₋₁|
+            </div>
+        </div>
+    </div>
 
     <div class="card">
-
         <h2>Tabel Iterasi</h2>
 
-        <table>
-
-            <thead>
-            <tr>
-                <th>Iterasi</th>
-                <th>a</th>
-                <th>b</th>
-                <th>c</th>
-                <th>f(a)</th>
-                <th>f(b)</th>
-                <th>f(c)</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-            <?php foreach ($hasil as $row): ?>
-
-                <tr id="row-<?= $row['iterasi'] ?>">
-
-                    <td>
-                        <?= $row['iterasi'] ?>
-                    </td>
-
-                    <td>
-                        <?= round($row['a'], 8) ?>
-                    </td>
-
-                    <td>
-                        <?= round($row['b'], 8) ?>
-                    </td>
-
-                    <td>
-                        <?= round($row['c'], 8) ?>
-                    </td>
-
-                    <td>
-                        <?= round($row['fa'], 8) ?>
-                    </td>
-
-                    <td>
-                        <?= round($row['fb'], 8) ?>
-                    </td>
-
-                    <td>
-                        <?= round($row['fc'], 8) ?>
-                    </td>
-
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Iterasi</th>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>f(a)</th>
+                    <th>f(b)</th>
+                    <th>f(c)</th>
+                    <th>Error Interval</th>
+                    <th>|Δc|</th>
                 </tr>
+                </thead>
 
-            <?php endforeach; ?>
-
-            </tbody>
-
-        </table>
-
+                <tbody>
+                <?php if (empty($hasil)): ?>
+                    <tr class="empty-row">
+                        <td colspan="9">Tidak ada iterasi karena interval belum memenuhi syarat awal biseksi.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($hasil as $row): ?>
+                        <tr id="row-<?= $row['iterasi'] ?>">
+                            <td><?= $row['iterasi'] ?></td>
+                            <td><?= round($row['a'], 8) ?></td>
+                            <td><?= round($row['b'], 8) ?></td>
+                            <td><?= round($row['c'], 8) ?></td>
+                            <td><?= round($row['fa'], 8) ?></td>
+                            <td><?= round($row['fb'], 8) ?></td>
+                            <td><?= round($row['fc'], 8) ?></td>
+                            <td><?= round($row['error_interval'], 10) ?></td>
+                            <td><?= $row['error_c'] === null ? '-' : round($row['error_c'], 10) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
 
-
 <script>
-
-const data = <?= json_encode($hasil) ?>;
-
-const minX = <?= $a ?>;
-const maxX = <?= $b ?>;
-
+const data = <?= json_encode($hasil, JSON_NUMERIC_CHECK) ?>;
+const isValid = <?= $isValid ? 'true' : 'false' ?>;
+const minX = <?= json_encode($a, JSON_NUMERIC_CHECK) ?>;
+const maxX = <?= json_encode($b, JSON_NUMERIC_CHECK) ?>;
 let currentStep = 0;
 let timer = null;
 
-function getPosition(x) {
-
-    return ((x - minX) / (maxX - minX)) * 100;
-
+function hasData()
+{
+    return isValid && Array.isArray(data) && data.length > 0;
 }
 
+function getPosition(x)
+{
+    if (maxX === minX) {
+        return 0;
+    }
 
-function showStep(index) {
+    return ((x - minX) / (maxX - minX)) * 100;
+}
 
-    if (index < 0 || index >= data.length) {
+function format(value)
+{
+    if (value === null || value === undefined) {
+        return '-';
+    }
+
+    return Number(value).toFixed(10).replace(/0+$/, '').replace(/\.$/, '');
+}
+
+function showStep(index)
+{
+    if (!hasData() || index < 0 || index >= data.length) {
         return;
     }
 
     currentStep = index;
 
     const item = data[index];
-
     const posA = getPosition(item.a);
     const posB = getPosition(item.b);
     const posC = getPosition(item.c);
+    const pointA = document.getElementById('pointA');
+    const pointB = document.getElementById('pointB');
+    const pointC = document.getElementById('pointC');
+    const labelA = document.getElementById('labelA');
+    const labelB = document.getElementById('labelB');
+    const labelC = document.getElementById('labelC');
+    const activeInterval = document.getElementById('activeInterval');
 
+    pointA.style.left = posA + '%';
+    pointB.style.left = posB + '%';
+    pointC.style.left = posC + '%';
 
-    document.getElementById('pointA').style.left =
-        posA + '%';
+    labelA.style.left = posA + '%';
+    labelB.style.left = posB + '%';
+    labelC.style.left = posC + '%';
 
-    document.getElementById('pointB').style.left =
-        posB + '%';
+    labelA.innerHTML = 'a = ' + format(item.a);
+    labelB.innerHTML = 'b = ' + format(item.b);
+    labelC.innerHTML = 'c = ' + format(item.c);
 
-    document.getElementById('pointC').style.left =
-        posC + '%';
+    activeInterval.style.left = posA + '%';
+    activeInterval.style.width = (posB - posA) + '%';
 
-    const labelA =
-        document.getElementById('labelA');
-
-    const labelB =
-        document.getElementById('labelB');
-
-    const labelC =
-        document.getElementById('labelC');
-
-
-    labelA.style.left =
-        posA + '%';
-
-    labelB.style.left =
-        posB + '%';
-
-    labelC.style.left =
-        posC + '%';
-
-
-    labelA.innerHTML =
-        'a = ' + format(item.a);
-
-    labelB.innerHTML =
-        'b = ' + format(item.b);
-
-    labelC.innerHTML =
-        'c = ' + format(item.c);
-
-
-    document.getElementById(
-        'activeInterval'
-    ).style.left = posA + '%';
-
-    document.getElementById(
-        'activeInterval'
-    ).style.width =
-        (posB - posA) + '%';
-
-
-    document.getElementById(
-        'iterationTitle'
-    ).innerHTML =
-        'Iterasi ' + item.iterasi;
-
-
-    document.getElementById(
-        'valueA'
-    ).innerHTML =
-        format(item.a) +
-        '<br><small>f(a) = ' +
-        format(item.fa) +
-        '</small>';
-
-
-    document.getElementById(
-        'valueB'
-    ).innerHTML =
-        format(item.b) +
-        '<br><small>f(b) = ' +
-        format(item.fb) +
-        '</small>';
-
-
-    document.getElementById(
-        'valueC'
-    ).innerHTML =
-        format(item.c) +
-        '<br><small>f(c) = ' +
-        format(item.fc) +
-        '</small>';
+    document.getElementById('iterationTitle').innerHTML = 'Iterasi ' + item.iterasi;
+    document.getElementById('valueA').innerHTML = format(item.a) + '<br><small>f(a) = ' + format(item.fa) + '</small>';
+    document.getElementById('valueB').innerHTML = format(item.b) + '<br><small>f(b) = ' + format(item.fb) + '</small>';
+    document.getElementById('valueC').innerHTML = format(item.c) + '<br><small>f(c) = ' + format(item.fc) + '</small>';
+    document.getElementById('errorInterval').innerHTML = format(item.error_interval);
+    document.getElementById('errorC').innerHTML = item.error_c === null ? 'Belum tersedia' : format(item.error_c);
 
     let decision = '';
 
     if (Math.abs(item.fc) < 1e-10) {
-
-        decision =
-            'f(c) mendekati 0. Akar ditemukan pada c = ' +
-            format(item.c);
-
+        decision = 'f(c) sudah sangat dekat dengan 0. Akar ditemukan di sekitar c = ' + format(item.c);
+    } else if (item.fa * item.fc < 0) {
+        decision = 'f(a) × f(c) < 0 → akar berada pada interval [a, c]. Pada iterasi berikutnya, b digeser ke posisi c.';
+    } else {
+        decision = 'f(c) × f(b) < 0 → akar berada pada interval [c, b]. Pada iterasi berikutnya, a digeser ke posisi c.';
     }
 
-    else if (item.fa * item.fc < 0) {
+    document.getElementById('decision').innerHTML = decision;
 
-        decision =
-            'f(a) × f(c) < 0, sehingga akar berada di [a, c]. ' +
-            'Maka b digeser ke posisi c.';
+    document.querySelectorAll('tbody tr').forEach(row => row.classList.remove('active-row'));
 
-    }
-
-    else {
-
-        decision =
-            'f(c) × f(b) < 0, sehingga akar berada di [c, b]. ' +
-            'Maka a digeser ke posisi c.';
-
-    }
-
-
-    document.getElementById(
-        'decision'
-    ).innerHTML = decision;
-
-    document
-        .querySelectorAll('tbody tr')
-        .forEach(row => {
-
-            row.classList.remove(
-                'active-row'
-            );
-
-        });
-
-
-    const activeRow =
-        document.getElementById(
-            'row-' + item.iterasi
-        );
-
+    const activeRow = document.getElementById('row-' + item.iterasi);
 
     if (activeRow) {
-
-        activeRow.classList.add(
-            'active-row'
-        );
-
+        activeRow.classList.add('active-row');
     }
 
+    drawErrorChart();
 }
 
-
-function nextStep() {
-
-    if (
-        currentStep <
-        data.length - 1
-    ) {
-
-        showStep(
-            currentStep + 1
-        );
-
+function nextStep()
+{
+    if (!hasData()) {
+        return;
     }
 
+    if (currentStep < data.length - 1) {
+        showStep(currentStep + 1);
+    }
 }
 
-
-function previousStep() {
+function previousStep()
+{
+    if (!hasData()) {
+        return;
+    }
 
     if (currentStep > 0) {
-
-        showStep(
-            currentStep - 1
-        );
-
+        showStep(currentStep - 1);
     }
-
 }
 
-
-function playAnimation() {
+function playAnimation()
+{
+    if (!hasData()) {
+        return;
+    }
 
     clearInterval(timer);
 
     timer = setInterval(() => {
-
-        if (
-            currentStep >=
-            data.length - 1
-        ) {
-
+        if (currentStep >= data.length - 1) {
             clearInterval(timer);
-
+            timer = null;
             return;
-
         }
 
         nextStep();
-
     }, 1500);
-
 }
 
+function pauseAnimation()
+{
+    if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+    }
+}
 
-function resetAnimation() {
+function resetAnimation()
+{
+    if (!hasData()) {
+        return;
+    }
 
-    clearInterval(timer);
-
+    pauseAnimation();
     currentStep = 0;
-
     showStep(0);
-
 }
 
+function drawErrorChart()
+{
+    const canvas = document.getElementById('errorChart');
+    const container = canvas.parentElement;
+    const dpr = window.devicePixelRatio || 1;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
-function format(value) {
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
 
-    return Number(value)
-        .toFixed(8)
-        .replace(
-            /0+$/,
-            ''
-        )
-        .replace(
-            /\.$/,
-            ''
-        );
+    const ctx = canvas.getContext('2d');
 
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+
+    if (!hasData()) {
+        ctx.fillStyle = '#64748b';
+        ctx.font = '14px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Grafik belum tersedia karena interval tidak memenuhi syarat biseksi.', width / 2, height / 2);
+        return;
+    }
+
+    const visibleData = data.slice(0, currentStep + 1);
+    const margin = { left: 70, right: 30, top: 25, bottom: 50 };
+    const plotWidth = width - margin.left - margin.right;
+    const plotHeight = height - margin.top - margin.bottom;
+    const allErrors = [];
+
+    data.forEach(item => {
+        allErrors.push(Number(item.error_interval));
+
+        if (item.error_c !== null) {
+            allErrors.push(Number(item.error_c));
+        }
+    });
+
+    const maxError = Math.max(...allErrors, 1e-12);
+
+    function getX(index)
+    {
+        if (data.length === 1) {
+            return margin.left + plotWidth / 2;
+        }
+
+        return margin.left + (index / (data.length - 1)) * plotWidth;
+    }
+
+    function getY(value)
+    {
+        return margin.top + (1 - value / maxError) * plotHeight;
+    }
+
+    const gridCount = 5;
+
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+
+    for (let i = 0; i <= gridCount; i++) {
+        const ratio = i / gridCount;
+        const y = margin.top + ratio * plotHeight;
+        const value = maxError * (1 - ratio);
+
+        ctx.beginPath();
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        ctx.moveTo(margin.left, y);
+        ctx.lineTo(width - margin.right, y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(value.toFixed(4), margin.left - 10, y);
+    }
+
+    ctx.strokeStyle = '#64748b';
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(margin.left, margin.top);
+    ctx.lineTo(margin.left, height - margin.bottom);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(margin.left, height - margin.bottom);
+    ctx.lineTo(width - margin.right, height - margin.bottom);
+    ctx.stroke();
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+
+    data.forEach((item, index) => {
+        const x = getX(index);
+
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(item.iterasi, x, height - margin.bottom + 10);
+    });
+
+    ctx.fillStyle = '#334155';
+    ctx.font = '13px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Iterasi', margin.left + plotWidth / 2, height - 15);
+
+    ctx.save();
+    ctx.translate(18, margin.top + plotHeight / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Error', 0, 0);
+    ctx.restore();
+
+    function drawSeries(key, color)
+    {
+        let started = false;
+
+        ctx.beginPath();
+
+        visibleData.forEach((item, index) => {
+            const value = item[key];
+
+            if (value === null || value === undefined) {
+                return;
+            }
+
+            const x = getX(index);
+            const y = getY(Number(value));
+
+            if (!started) {
+                ctx.moveTo(x, y);
+                started = true;
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        visibleData.forEach((item, index) => {
+            const value = item[key];
+
+            if (value === null || value === undefined) {
+                return;
+            }
+
+            const x = getX(index);
+            const y = getY(Number(value));
+
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            if (index === currentStep) {
+                ctx.beginPath();
+                ctx.arc(x, y, 9, 0, Math.PI * 2);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        });
+    }
+
+    drawSeries('error_interval', '#2563eb');
+    drawSeries('error_c', '#f59e0b');
 }
 
+window.addEventListener('resize', drawErrorChart);
 
-showStep(0);
-
+if (hasData()) {
+    showStep(0);
+} else {
+    drawErrorChart();
+}
 </script>
 
 </body>

@@ -15,6 +15,9 @@
          <li class="nav-item">
           <a class="nav-link" href="nn/index.php">Neural Network</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="metodenumerik/biseksi.php">Metode Numerik</a>
+        </li>
       </ul>
       <!-- <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
