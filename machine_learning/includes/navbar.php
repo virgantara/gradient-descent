@@ -6,6 +6,9 @@ $machineLearningPages = [
     'linear-regression-single.php',
     'linear-regression-multiple.php',
     'neural-network.php',
+    'decision-tree.php',
+    'random-forest.php',
+    'svm.php',
 ];
 
 $isMachineLearningActive = in_array($currentPage, $machineLearningPages, true);
@@ -56,6 +59,30 @@ $isMachineLearningActive = in_array($currentPage, $machineLearningPages, true);
                         <?= $currentPage === 'neural-network.php' ? 'aria-current="page"' : '' ?>
                     >
                         Neural Network dari Nol
+                    </a>
+
+                    <a
+                        href="decision-tree.php"
+                        class="<?= $currentPage === 'decision-tree.php' ? 'active' : '' ?>"
+                        <?= $currentPage === 'decision-tree.php' ? 'aria-current="page"' : '' ?>
+                    >
+                        Decision Tree
+                    </a>
+
+                    <a
+                        href="random-forest.php"
+                        class="<?= $currentPage === 'random-forest.php' ? 'active' : '' ?>"
+                        <?= $currentPage === 'random-forest.php' ? 'aria-current="page"' : '' ?>
+                    >
+                        Random Forest
+                    </a>
+
+                    <a
+                        href="svm.php"
+                        class="<?= $currentPage === 'svm.php' ? 'active' : '' ?>"
+                        <?= $currentPage === 'svm.php' ? 'aria-current="page"' : '' ?>
+                    >
+                        Support Vector Machine (SVM)
                     </a>
                 </div>
             </div>
