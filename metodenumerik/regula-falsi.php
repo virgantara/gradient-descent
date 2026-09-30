@@ -82,7 +82,7 @@ $fcAwal = f($cAwal);
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Animasi Regula Falsi</title>
+    <title>Regula Falsi</title>
     <link rel="stylesheet" href="assets/metode-akar.css">
 </head>
 <body class="page-regula-falsi">
@@ -90,7 +90,7 @@ $fcAwal = f($cAwal);
 <?php require __DIR__ . '/partials/navbar.php'; ?>
 <div class="container">
 
-    <h1>Animasi Metode Regula Falsi</h1>
+    <h1>Metode Regula Falsi</h1>
     <div class="subtitle">
         Contoh fungsi: <strong>f(x) = x² - 2</strong>, interval awal <strong>[<?= $aAwal ?>, <?= $bAwal ?>]</strong>
     </div>
