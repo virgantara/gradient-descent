@@ -1,3 +1,214 @@
+
+<style>
+.calc-animation {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+}
+
+.calc-stage {
+    min-height: 250px;
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.calc-step-title {
+    margin-bottom: 8px;
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.calc-step-text {
+    color: #475569;
+    line-height: 1.65;
+}
+
+.calc-equation {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-family: "Courier New", monospace;
+    font-size: 15px;
+    line-height: 1.75;
+    overflow-x: auto;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.calc-box {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.calc-box.active {
+    transform: translateY(-2px);
+    border-color: #93c5fd;
+    background: #eff6ff;
+}
+
+.calc-box.success {
+    border-color: #86efac;
+    background: #f0fdf4;
+}
+
+.calc-box.warning {
+    border-color: #fcd34d;
+    background: #fffbeb;
+}
+
+.calc-box-title {
+    margin-bottom: 6px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.calc-box-value {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.calc-meter {
+    height: 16px;
+    margin-top: 14px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e2e8f0;
+}
+
+.calc-meter-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: #2563eb;
+    transition: width .5s ease;
+}
+
+.calc-fade {
+    animation: calcFade .35s ease;
+}
+
+@keyframes calcFade {
+    from {
+        opacity: .2;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 700px) {
+    .calc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-stage {
+        min-height: 220px;
+    }
+}
+
+.dt-calc-tree-wrap {
+    margin-top: 18px;
+    padding: 16px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.dt-calc-tree-title {
+    margin-bottom: 12px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.dt-calc-tree-svg {
+    width: 100%;
+    height: auto;
+}
+
+.dt-calc-tree-link {
+    stroke: #cbd5e1;
+    stroke-width: 3;
+    transition: stroke .25s ease, opacity .25s ease;
+}
+
+.dt-calc-tree-link.active {
+    stroke: #2563eb;
+}
+
+.dt-calc-tree-link.path {
+    stroke: #16a34a;
+    stroke-width: 4;
+}
+
+.dt-calc-tree-node {
+    fill: #ffffff;
+    stroke: #cbd5e1;
+    stroke-width: 3;
+    transition: fill .25s ease, stroke .25s ease, transform .25s ease;
+}
+
+.dt-calc-tree-node.active {
+    fill: #eff6ff;
+    stroke: #2563eb;
+}
+
+.dt-calc-tree-node.leaf-yes.active {
+    fill: #ecfdf5;
+    stroke: #16a34a;
+}
+
+.dt-calc-tree-node.leaf-no.active {
+    fill: #fef2f2;
+    stroke: #ef4444;
+}
+
+.dt-calc-tree-node.path {
+    fill: #ecfdf5;
+    stroke: #16a34a;
+}
+
+.dt-calc-tree-text {
+    fill: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+    text-anchor: middle;
+}
+
+.dt-calc-tree-subtext {
+    fill: #64748b;
+    font-size: 11px;
+    text-anchor: middle;
+}
+
+</style>
+
 <main class="container">
     <div class="page-header">
         <h1>Decision Tree</h1>
@@ -180,6 +391,97 @@
 
         <div class="mini-formula">
             Gini = 1 - Σ p(class)²
+        </div>
+
+        <div class="calc-animation">
+            <div class="calc-stage calc-fade" id="dtCalcStage">
+                <div class="calc-step-title" id="dtCalcTitle"></div>
+                <div class="calc-step-text" id="dtCalcText"></div>
+                <div class="calc-equation" id="dtCalcEquation"></div>
+
+                <div class="calc-grid">
+                    <div class="calc-box" id="dtCalcBox1">
+                        <div class="calc-box-title" id="dtCalcBox1Title">Root</div>
+                        <div class="calc-box-value" id="dtCalcBox1Value">-</div>
+                    </div>
+                    <div class="calc-box" id="dtCalcBox2">
+                        <div class="calc-box-title" id="dtCalcBox2Title">Kiri</div>
+                        <div class="calc-box-value" id="dtCalcBox2Value">-</div>
+                    </div>
+                    <div class="calc-box" id="dtCalcBox3">
+                        <div class="calc-box-title" id="dtCalcBox3Title">Kanan</div>
+                        <div class="calc-box-value" id="dtCalcBox3Value">-</div>
+                    </div>
+                </div>
+
+                <div class="calc-meter">
+                    <div class="calc-meter-fill" id="dtCalcMeter"></div>
+                </div>
+
+                <div class="dt-calc-tree-wrap">
+                    <div class="dt-calc-tree-title">Bentuk Tree dari Perhitungan</div>
+                    <svg class="dt-calc-tree-svg" viewBox="0 0 760 360" aria-label="Decision tree calculation visualization">
+                        <line id="dtCalcLink1" class="dt-calc-tree-link" x1="380" y1="80" x2="190" y2="145" opacity="0.2"></line>
+                        <line id="dtCalcLink2" class="dt-calc-tree-link" x1="380" y1="80" x2="560" y2="145" opacity="0.2"></line>
+                        <line id="dtCalcLink3" class="dt-calc-tree-link" x1="560" y1="175" x2="450" y2="245" opacity="0.2"></line>
+                        <line id="dtCalcLink4" class="dt-calc-tree-link" x1="560" y1="175" x2="660" y2="245" opacity="0.2"></line>
+                        <line id="dtCalcLink5" class="dt-calc-tree-link" x1="450" y1="275" x2="385" y2="325" opacity="0.2"></line>
+                        <line id="dtCalcLink6" class="dt-calc-tree-link" x1="450" y1="275" x2="515" y2="325" opacity="0.2"></line>
+
+                        <text id="dtCalcEdge1" class="dt-calc-tree-subtext" x="260" y="105" opacity="0">Ya</text>
+                        <text id="dtCalcEdge2" class="dt-calc-tree-subtext" x="490" y="105" opacity="0">Tidak</text>
+                        <text id="dtCalcEdge3" class="dt-calc-tree-subtext" x="500" y="212" opacity="0">Ya</text>
+                        <text id="dtCalcEdge4" class="dt-calc-tree-subtext" x="620" y="212" opacity="0">Tidak</text>
+                        <text id="dtCalcEdge5" class="dt-calc-tree-subtext" x="410" y="307" opacity="0">Ya</text>
+                        <text id="dtCalcEdge6" class="dt-calc-tree-subtext" x="492" y="307" opacity="0">Tidak</text>
+
+                        <circle id="dtCalcRoot" class="dt-calc-tree-node" cx="380" cy="55" r="44"></circle>
+                        <text id="dtCalcRootText1" class="dt-calc-tree-text" x="380" y="46">Root</text>
+                        <text id="dtCalcRootText2" class="dt-calc-tree-subtext" x="380" y="63">4 Lulus, 4 Tidak</text>
+                        <text id="dtCalcRootText3" class="dt-calc-tree-subtext" x="380" y="78">Gini = 0.50</text>
+
+                        <circle id="dtCalcLeftLeaf" class="dt-calc-tree-node leaf-no" cx="190" cy="155" r="40" opacity="0"></circle>
+                        <text id="dtCalcLeftLeafText1" class="dt-calc-tree-text" x="190" y="150" opacity="0">Tidak</text>
+                        <text id="dtCalcLeftLeafText2" class="dt-calc-tree-subtext" x="190" y="167" opacity="0">3 data | Gini 0</text>
+
+                        <circle id="dtCalcRightNode" class="dt-calc-tree-node" cx="560" cy="155" r="44" opacity="0"></circle>
+                        <text id="dtCalcRightNodeText1" class="dt-calc-tree-text" x="560" y="146" opacity="0">Node Kanan</text>
+                        <text id="dtCalcRightNodeText2" class="dt-calc-tree-subtext" x="560" y="163" opacity="0">4 Lulus, 1 Tidak</text>
+                        <text id="dtCalcRightNodeText3" class="dt-calc-tree-subtext" x="560" y="178" opacity="0">Gini = 0.32</text>
+
+                        <circle id="dtCalcMidNode" class="dt-calc-tree-node" cx="450" cy="255" r="38" opacity="0"></circle>
+                        <text id="dtCalcMidNodeText1" class="dt-calc-tree-text" x="450" y="250" opacity="0">Kehadiran</text>
+                        <text id="dtCalcMidNodeText2" class="dt-calc-tree-subtext" x="450" y="267" opacity="0">≤ 73 ?</text>
+
+                        <circle id="dtCalcRightLeaf" class="dt-calc-tree-node leaf-yes" cx="660" cy="255" r="38" opacity="0"></circle>
+                        <text id="dtCalcRightLeafText1" class="dt-calc-tree-text" x="660" y="250" opacity="0">Lulus</text>
+                        <text id="dtCalcRightLeafText2" class="dt-calc-tree-subtext" x="660" y="267" opacity="0">3 data</text>
+
+                        <circle id="dtCalcLeafY" class="dt-calc-tree-node leaf-yes" cx="385" cy="325" r="26" opacity="0"></circle>
+                        <text id="dtCalcLeafYText" class="dt-calc-tree-text" x="385" y="330" opacity="0">L</text>
+
+                        <circle id="dtCalcLeafN" class="dt-calc-tree-node leaf-no" cx="515" cy="325" r="26" opacity="0"></circle>
+                        <text id="dtCalcLeafNText" class="dt-calc-tree-text" x="515" y="330" opacity="0">T</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <button class="btn-secondary" type="button" onclick="dtCalcPrev()">← Sebelumnya</button>
+                <button class="btn-primary" type="button" onclick="dtCalcNext()">Berikutnya →</button>
+                <button class="btn-primary" type="button" onclick="dtCalcPlay()">▶ Play Hitungan</button>
+                <button class="btn-secondary" type="button" onclick="dtCalcPause()">⏸ Pause</button>
+                <button class="btn-secondary" type="button" onclick="dtCalcReset()">↺ Reset</button>
+            </div>
+
+            <div class="step-chip-grid">
+                <div class="step-chip" data-dtcalc-chip="0">Root Gini</div>
+                <div class="step-chip" data-dtcalc-chip="1">Bagi Data</div>
+                <div class="step-chip" data-dtcalc-chip="2">Gini Kiri</div>
+                <div class="step-chip" data-dtcalc-chip="3">Gini Kanan</div>
+                <div class="step-chip" data-dtcalc-chip="4">Weighted Gini</div>
+                <div class="step-chip" data-dtcalc-chip="5">Bandingkan</div>
+            </div>
         </div>
 
         <div class="score-table-wrap" style="margin-top:16px;">
@@ -454,4 +756,268 @@ function dtReset() {
     dtRender();
 }
 dtRender();
+
+
+const dtCalcSteps = [
+    {
+        title: 'Hitungan 1 — Gini di root',
+        text: 'Di root ada 8 data: 4 Lulus dan 4 Tidak. Karena masih 50:50, node ini cukup campur.',
+        equation: 'Gini(root) = 1 - (4/8)² - (4/8)² = 1 - 0.25 - 0.25 = 0.50',
+        box1Title: 'Root',
+        box1Value: '4 Lulus + 4 Tidak',
+        box2Title: 'p(Lulus)',
+        box2Value: '4/8 = 0.50',
+        box3Title: 'p(Tidak)',
+        box3Value: '4/8 = 0.50',
+        meter: 17
+    },
+    {
+        title: 'Hitungan 2 — Coba split Jam Belajar ≤ 4.5',
+        text: 'Kita pecah dataset menjadi dua kelompok. Sisi kiri berisi A, B, C. Sisi kanan berisi D, E, F, G, H.',
+        equation: 'Kiri = 3 data | Kanan = 5 data',
+        box1Title: 'Split',
+        box1Value: 'Jam ≤ 4.5',
+        box2Title: 'Kiri',
+        box2Value: '0 Lulus, 3 Tidak',
+        box3Title: 'Kanan',
+        box3Value: '4 Lulus, 1 Tidak',
+        meter: 34
+    },
+    {
+        title: 'Hitungan 3 — Gini sisi kiri',
+        text: 'Sisi kiri isinya cuma kelas Tidak. Ini node yang super bersih.',
+        equation: 'Gini(kiri) = 1 - (0/3)² - (3/3)² = 1 - 0 - 1 = 0',
+        box1Title: 'Jumlah',
+        box1Value: '3 data',
+        box2Title: 'Lulus',
+        box2Value: '0/3',
+        box3Title: 'Gini Kiri',
+        box3Value: '0.00',
+        meter: 50
+    },
+    {
+        title: 'Hitungan 4 — Gini sisi kanan',
+        text: 'Sisi kanan masih ada satu data Tidak di antara empat data Lulus, jadi belum 100% bersih.',
+        equation: 'Gini(kanan) = 1 - (4/5)² - (1/5)² = 1 - 0.64 - 0.04 = 0.32',
+        box1Title: 'Jumlah',
+        box1Value: '5 data',
+        box2Title: 'Komposisi',
+        box2Value: '4 Lulus, 1 Tidak',
+        box3Title: 'Gini Kanan',
+        box3Value: '0.32',
+        meter: 67
+    },
+    {
+        title: 'Hitungan 5 — Gabungkan dengan Weighted Gini',
+        text: 'Karena ukuran kelompok kiri dan kanan beda, Gini-nya tidak sekadar dirata-rata. Kita kasih bobot sesuai jumlah datanya.',
+        equation: 'Weighted Gini = (3/8)(0) + (5/8)(0.32) = 0 + 0.20 = 0.20',
+        box1Title: 'Bobot Kiri',
+        box1Value: '3/8',
+        box2Title: 'Bobot Kanan',
+        box2Value: '5/8',
+        box3Title: 'Weighted Gini',
+        box3Value: '0.20',
+        meter: 84
+    },
+    {
+        title: 'Hitungan 6 — Bandingkan kandidat split',
+        text: 'Pada dataset kecil ini ada beberapa kandidat yang kebetulan tie di 0.20. Untuk demo kita pilih Jam ≤ 4.5 sebagai root. Implementasi nyata punya tie-break sendiri.',
+        equation: 'Jam ≤ 4.5 → 0.20 | Kehadiran ≤ 76 → 0.20 | Jam ≤ 5.5 → 0.20',
+        box1Title: 'Kandidat 1',
+        box1Value: 'Jam ≤ 4.5 = 0.20',
+        box2Title: 'Kandidat 2',
+        box2Value: 'Kehadiran ≤ 76 = 0.20',
+        box3Title: 'Dipilih untuk Demo',
+        box3Value: 'Jam ≤ 4.5',
+        meter: 100
+    }
+];
+
+let dtCalcIndex = 0;
+let dtCalcTimer = null;
+
+function dtCalcTreeSetOpacity(ids, value)
+{
+    ids.forEach(id => {
+        document.getElementById(id).setAttribute('opacity', value);
+    });
+}
+
+function dtCalcTreeSetClass(ids, className, enabled)
+{
+    ids.forEach(id => {
+        document.getElementById(id).classList.toggle(className, enabled);
+    });
+}
+
+function dtCalcRender()
+{
+    const step = dtCalcSteps[dtCalcIndex];
+
+    document.getElementById('dtCalcTitle').textContent = step.title;
+    document.getElementById('dtCalcText').textContent = step.text;
+    document.getElementById('dtCalcEquation').textContent = step.equation;
+
+    document.getElementById('dtCalcBox1Title').textContent = step.box1Title;
+    document.getElementById('dtCalcBox1Value').textContent = step.box1Value;
+    document.getElementById('dtCalcBox2Title').textContent = step.box2Title;
+    document.getElementById('dtCalcBox2Value').textContent = step.box2Value;
+    document.getElementById('dtCalcBox3Title').textContent = step.box3Title;
+    document.getElementById('dtCalcBox3Value').textContent = step.box3Value;
+
+    ['dtCalcBox1', 'dtCalcBox2', 'dtCalcBox3'].forEach(id => {
+        document.getElementById(id).classList.remove('active', 'success', 'warning');
+        document.getElementById(id).classList.add('active');
+    });
+
+    if (dtCalcIndex === 2) {
+        document.getElementById('dtCalcBox3').classList.add('success');
+    }
+
+    if (dtCalcIndex === 5) {
+        document.getElementById('dtCalcBox3').classList.add('success');
+    }
+
+    document.getElementById('dtCalcMeter').style.width = step.meter + '%';
+
+    dtCalcTreeSetOpacity([
+        'dtCalcLeftLeaf','dtCalcLeftLeafText1','dtCalcLeftLeafText2',
+        'dtCalcRightNode','dtCalcRightNodeText1','dtCalcRightNodeText2','dtCalcRightNodeText3',
+        'dtCalcMidNode','dtCalcMidNodeText1','dtCalcMidNodeText2',
+        'dtCalcRightLeaf','dtCalcRightLeafText1','dtCalcRightLeafText2',
+        'dtCalcLeafY','dtCalcLeafYText','dtCalcLeafN','dtCalcLeafNText',
+        'dtCalcEdge1','dtCalcEdge2','dtCalcEdge3','dtCalcEdge4','dtCalcEdge5','dtCalcEdge6'
+    ], 0);
+
+    dtCalcTreeSetClass([
+        'dtCalcRoot','dtCalcLeftLeaf','dtCalcRightNode','dtCalcMidNode',
+        'dtCalcRightLeaf','dtCalcLeafY','dtCalcLeafN'
+    ], 'active', false);
+
+    dtCalcTreeSetClass([
+        'dtCalcRoot','dtCalcLeftLeaf','dtCalcRightNode','dtCalcMidNode',
+        'dtCalcRightLeaf','dtCalcLeafY','dtCalcLeafN'
+    ], 'path', false);
+
+    dtCalcTreeSetClass([
+        'dtCalcLink1','dtCalcLink2','dtCalcLink3','dtCalcLink4','dtCalcLink5','dtCalcLink6'
+    ], 'active', false);
+
+    dtCalcTreeSetClass([
+        'dtCalcLink1','dtCalcLink2','dtCalcLink3','dtCalcLink4','dtCalcLink5','dtCalcLink6'
+    ], 'path', false);
+
+    document.getElementById('dtCalcRoot').classList.add('active');
+    document.getElementById('dtCalcRootText1').textContent = dtCalcIndex >= 1 ? 'Jam ≤ 4.5 ?' : 'Root';
+    document.getElementById('dtCalcRootText2').textContent = dtCalcIndex >= 1 ? 'split pertama' : '4 Lulus, 4 Tidak';
+    document.getElementById('dtCalcRootText3').textContent = dtCalcIndex >= 1 ? 'Weighted Gini = 0.20' : 'Gini = 0.50';
+
+    if (dtCalcIndex >= 1) {
+        dtCalcTreeSetClass(['dtCalcLink1', 'dtCalcLink2'], 'active', true);
+        dtCalcTreeSetOpacity(['dtCalcEdge1', 'dtCalcEdge2'], 1);
+        dtCalcTreeSetOpacity([
+            'dtCalcLeftLeaf','dtCalcLeftLeafText1','dtCalcLeftLeafText2',
+            'dtCalcRightNode','dtCalcRightNodeText1','dtCalcRightNodeText2','dtCalcRightNodeText3'
+        ], 1);
+    }
+
+    if (dtCalcIndex >= 2) {
+        document.getElementById('dtCalcLeftLeaf').classList.add('active');
+    }
+
+    if (dtCalcIndex >= 3) {
+        document.getElementById('dtCalcRightNode').classList.add('active');
+        document.getElementById('dtCalcRightNodeText1').textContent = 'Kehadiran';
+        document.getElementById('dtCalcRightNodeText2').textContent = '≤ 76 ?';
+        document.getElementById('dtCalcRightNodeText3').textContent = 'Gini kanan = 0.32';
+        dtCalcTreeSetClass(['dtCalcLink3', 'dtCalcLink4'], 'active', true);
+        dtCalcTreeSetOpacity(['dtCalcEdge3', 'dtCalcEdge4'], 1);
+        dtCalcTreeSetOpacity([
+            'dtCalcMidNode','dtCalcMidNodeText1','dtCalcMidNodeText2',
+            'dtCalcRightLeaf','dtCalcRightLeafText1','dtCalcRightLeafText2'
+        ], 1);
+    }
+
+    if (dtCalcIndex >= 4) {
+        document.getElementById('dtCalcMidNode').classList.add('active');
+        document.getElementById('dtCalcRightLeaf').classList.add('active');
+        dtCalcTreeSetClass(['dtCalcLink5', 'dtCalcLink6'], 'active', true);
+        dtCalcTreeSetOpacity(['dtCalcEdge5', 'dtCalcEdge6'], 1);
+        dtCalcTreeSetOpacity([
+            'dtCalcLeafY','dtCalcLeafYText','dtCalcLeafN','dtCalcLeafNText'
+        ], 1);
+        document.getElementById('dtCalcLeafY').classList.add('active');
+        document.getElementById('dtCalcLeafN').classList.add('active');
+    }
+
+    if (dtCalcIndex >= 5) {
+        dtCalcTreeSetClass(['dtCalcRoot','dtCalcRightNode','dtCalcRightLeaf'], 'path', true);
+        dtCalcTreeSetClass(['dtCalcLink2','dtCalcLink4'], 'path', true);
+        document.getElementById('dtCalcRightLeafText1').textContent = 'Lulus ✅';
+        document.getElementById('dtCalcRightLeafText2').textContent = 'jalur (5,79)';
+    } else {
+        document.getElementById('dtCalcRightLeafText1').textContent = 'Lulus';
+        document.getElementById('dtCalcRightLeafText2').textContent = '3 data';
+    }
+
+    const stage = document.getElementById('dtCalcStage');
+    stage.classList.remove('calc-fade');
+    void stage.offsetWidth;
+    stage.classList.add('calc-fade');
+
+    document.querySelectorAll('[data-dtcalc-chip]').forEach(chip => {
+        chip.classList.toggle(
+            'active',
+            Number(chip.dataset.dtcalcChip) === dtCalcIndex
+        );
+    });
+}
+
+function dtCalcNext()
+{
+    if (dtCalcIndex < dtCalcSteps.length - 1) {
+        dtCalcIndex++;
+        dtCalcRender();
+    }
+}
+
+function dtCalcPrev()
+{
+    if (dtCalcIndex > 0) {
+        dtCalcIndex--;
+        dtCalcRender();
+    }
+}
+
+function dtCalcPlay()
+{
+    dtCalcPause();
+
+    dtCalcTimer = setInterval(() => {
+        if (dtCalcIndex >= dtCalcSteps.length - 1) {
+            dtCalcPause();
+            return;
+        }
+
+        dtCalcNext();
+    }, 1800);
+}
+
+function dtCalcPause()
+{
+    if (dtCalcTimer !== null) {
+        clearInterval(dtCalcTimer);
+        dtCalcTimer = null;
+    }
+}
+
+function dtCalcReset()
+{
+    dtCalcPause();
+    dtCalcIndex = 0;
+    dtCalcRender();
+}
+
+dtCalcRender();
+
 </script>
